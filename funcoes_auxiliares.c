@@ -6,10 +6,14 @@
 void adicionar(){
 }
 
-void listar(){}
+void listar(){
+}
 
-void eliminar(){}
+void eliminar(){
+}
 
-void editar(){}
+void editar(){
+}
 
-void tocar_musica(){}
+void tocar_musica(){
+}
