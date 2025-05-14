@@ -1,6 +1,3 @@
-#ifndef FUNCOES_AUXILIARES_H
-#define FUNCOES_AUXILIARES_H
-
 #define MAX_MUSICAS 100
 #define TAM_NOME 100
 #define TAM_ARTISTA 100
@@ -20,4 +17,4 @@ void eliminar(Musica lista[], int *total, int id);
 void editar(Musica lista[], int total, int id);
 void tocar_musica(Musica lista[], int total, int id);
 
-#endif
+
