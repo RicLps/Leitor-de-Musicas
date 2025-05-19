@@ -2,23 +2,23 @@
 #include <stdio.h>
 #include <string.h>
 
-void adicionar(Musica lista[], int *total) {
+void adicionar(){
     
 }
 
-void listar(Musica lista[], int total) {
+void listar(){
     
 }
 
-void eliminar(Musica lista[], int *total, int id) {
+void eliminar(){
    
 }
 
-void editar(Musica lista[], int total, int id) {
+void editar(){
     
 }
 
-void tocar_musica(Musica lista[], int total, int id) {
+void tocar_musica(){
     
 }
 
