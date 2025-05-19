@@ -1,6 +1,6 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 
     
