@@ -4,7 +4,6 @@
 int main() {
     Musica lista[MAX_MUSICAS];
     int total = 0;
-    int opcao, id;
 
     do {
         printf("\n+===============================+\n");
@@ -19,20 +18,13 @@ int main() {
         printf("+===============================+\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
-        getchar(); // limpar o '\n'
 
         switch (opcao) {
-            case 1: adicionar(lista, &total); break;
-            case 2: listar(lista, total); break;
-            case 3:
-                printf("ID da música: "); scanf("%d", &id); getchar();
-                tocar_musica(lista, total, id); break;
-            case 4:
-                printf("ID da música: "); scanf("%d", &id); getchar();
-                editar(lista, total, id); break;
-            case 5:
-                printf("ID da música: "); scanf("%d", &id); getchar();
-                eliminar(lista, &total, id); break;
+            case 1: adicionar(); break;
+            case 2: listar(); break;
+            case 3: tocar_musica(); break;
+            case 4: editar(); break;
+            case 5: eliminar(); break;
             case 0: printf("Saindo...\n"); break;
             default: printf("Opção inválida.\n");
         }
