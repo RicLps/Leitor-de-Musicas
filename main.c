@@ -1,6 +1,9 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
+#include <stlib.h>
 
+
+    
 int main() {
     Musica lista[MAX_MUSICAS];
     int total = 0;
