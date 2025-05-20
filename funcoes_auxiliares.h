@@ -11,9 +11,7 @@ typedef struct {
     int duracao;
 } Musica;
 
-void adicionar(Musica lista[], int *total);
+int adicionar(Musica lista[], int total);
 void listar(Musica lista[], int total);
-void eliminar(Musica lista[], int *total, int id);
-void tocar_musica(Musica lista[], int total, int id);
-
-
+int eliminar(Musica lista[], int total);
+void tocar_musica();
