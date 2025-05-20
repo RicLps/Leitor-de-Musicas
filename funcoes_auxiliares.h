@@ -3,6 +3,8 @@
 #define TAM_ARTISTA 100
 #define TAM_GENERO 50
 
+int total = 0;
+
 typedef struct {
     int id;
     char nome[TAM_NOME];
