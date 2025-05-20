@@ -43,9 +43,9 @@ int main() {
                     scanf("%d", &subopcao);
 
                     switch (subopcao) {
-                        case 1: adicionar(lista, &total); break;
+                        case 1: adicionar(lista, total); break;
                         case 2: listar(lista, total); break;
-                        case 3: eliminar(lista, &total); break;
+                        case 3: total = eliminar(lista, total); break;
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }
@@ -60,7 +60,7 @@ int main() {
 
             case 2:
                 system(LIMPAR_TELA);
-                tocar_musica(lista, total);
+                tocar_musica();
                 printf("\nPressione Enter para continuar...");
                 getchar(); getchar();
                 break;
