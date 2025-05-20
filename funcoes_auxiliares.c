@@ -36,9 +36,6 @@ void listar(){
     
 }
 
-void eliminar(){
-   
-}
 
 void eliminar(Musica lista_musicas[], int *total) {
 int id = 0;
@@ -57,7 +54,7 @@ lista_musicas[j] = lista_musicas[j + 1]; // após a musica ser removida, desloca
 }
 
 (*total)--; // para descer o número de musicas da lista de musicas
-printf("Música com id %d removida com sucesso!\n", id); // msg que a musica que o utilizador queira remover foi removido
+printf("Música com id %d foi removida com sucesso \n", id); // msg que a musica que o utilizador queira remover foi removido
 break;
 }
 }
