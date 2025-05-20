@@ -14,10 +14,6 @@ void eliminar(){
    
 }
 
-void editar(){
-    
-}
-
 void tocar_musica(){
     
 }
