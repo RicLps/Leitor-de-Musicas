@@ -1,3 +1,4 @@
+#include "funcoes_auxiliares.h"
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
