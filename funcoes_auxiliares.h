@@ -3,6 +3,7 @@
 #define TAM_ARTISTA 100
 #define TAM_GENERO 50
 
+FILE *f;
 int total = 0;
 
 typedef struct {
