@@ -41,6 +41,24 @@ void listar(){
     
 }
 
+void criar_album(Album albuns[], int *total_albuns) {
+    if (*total_albuns >= MAX_ALBUNS) {
+        printf("Não é possível criar álbum porque você excedeu o limite de criação de albuns.\n");
+        return;
+}
+
+ Album novo_album;
+ novo_album.total_musicas = 0; // define o total_musicas = 0, já que não adicionamos músicas ainda.
+
+printf("Insira o nome do álbum á se criar (máximo 20 caracteres): \n");
+    fgets(novo_album.nome, NOME_ALBUM, stdin);
+
+    albuns[*total_albuns] = novo_album; // vai adicionar um o álbum que criei na próxima posição livre do array albums.
+    (*total_albuns)++; // aumenta o valor do *total_albuns para mostrar que um album foi criado dentor do *total_albuns
+
+printf("Álbum ‘%s’ foi criado com sucesso. Lembre-se que um álbum aceita somente 100 músicas! \n", novo_album.nome);
+}
+
 
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
