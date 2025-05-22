@@ -46,7 +46,6 @@ void criar_album(Album albuns[], int *total_albuns) {
         printf("Não é possível criar álbum porque você excedeu o limite de criação de albuns.\n");
         return;
 }
-
  Album novo_album;
  novo_album.total_musicas = 0; // define o total_musicas = 0, já que não adicionamos músicas ainda.
 
@@ -56,9 +55,47 @@ printf("Insira o nome do álbum á se criar (máximo 20 caracteres): \n");
     albuns[*total_albuns] = novo_album; // vai adicionar um o álbum que criei na próxima posição livre do array albums.
     (*total_albuns)++; // aumenta o valor do *total_albuns para mostrar que um album foi criado dentor do *total_albuns
 
-printf("Álbum ‘%s’ foi criado com sucesso. Lembre-se que um álbum aceita somente 100 músicas! \n", novo_album.nome);
+printf("Álbum %s foi criado com sucesso. Lembre-se que um álbum aceita somente 100 músicas! \n", novo_album.nome);
 }
+void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
+    if (total_albuns == 0) {
+        printf("Ainda não foi criado nenhum álbum. \n");
+        return;
+    }
 
+    int escolha_album;
+    printf("Escolha o álbum para adicionar músicas:\n");
+    for (int i = 0; i < total_albuns; i++) {
+       printf("Id: %d - Álbum: %s\n", i, albuns[i].nome);  // nessa, indica o id do álbum e nome do álbum com o albuns[i].nome onde o albuns é um vetor de struct Albuns, que foi declarado em funcoes.auxiliares.h 
+    }
+
+    printf("Insira o id do álbum: \n");
+    scanf("%d", &escolha_album);
+
+    if (escolha_album < 0 || escolha_album >= total_albuns) { // verifique se o album escolhido pelo usuario esta entre 0 e o numero de albuns criados.
+        printf("O álbum com id %d não existe.\n", escolha_album);
+        return;
+    }
+
+    if (albuns[escolha_album].total_musicas >= MAX_MUSICAS_ALBUM) {
+        printf("O álbum já atingiu o limite máximo de 100 músicas.\n");
+        return;
+    }
+
+ printf("\ Músicas disponíveis: \n");
+    for(int i = 0; i < total_musicas; i++) { // aqui vai listar todas as musicas ja adicionadas no sistema.
+       printf("Id: %d - Nome: %s", lista_musicas[i].id, lista_musicas[i].nome);
+    }
+
+  int id_musica;
+    printf("Insira o Id da música que deseja adicionar ao álbum: \n");
+    scanf("%d", &id_musica);
+
+ int pesquisa_musica = 0; // definimos uma variavel que vai nos indicar se o id da musica que o utilizador inseriu acima existe
+    for (int i = 0; i < total_musicas; i++) { // percorre todos as musicas do sistema 
+        if (lista_musicas[i].id == id_musica) { // e vê se o id inserido pelo utilizador existe.
+            pesquisa_musica = 1; // serve como condição de paragem do for
+//Ainda incompleto; Ass: Messi.
 
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
