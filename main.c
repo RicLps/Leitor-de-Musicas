@@ -2,12 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef _WIN32
-    #define LIMPAR_TELA "cls"
-#else
-    #define LIMPAR_TELA "clear"
-#endif
-
 #define MAX_MUSICAS 100
 
 int main() {
@@ -16,7 +10,7 @@ int main() {
     int opcao, subopcao;
 
     do {
-        system(LIMPAR_TELA);
+        system("cls");
         printf("\n+===============================+\n");
         printf("|      Leitor de Música em C    |\n");
         printf("+===============================+\n");
@@ -30,7 +24,7 @@ int main() {
         switch (opcao) {
             case 1:
                 do {
-                    system(LIMPAR_TELA);
+                    system("cls");
                     printf("\n+===============================+\n");
                     printf("|        Gerenciar Músicas      |\n");
                     printf("+===============================+\n");
@@ -59,7 +53,7 @@ int main() {
                 break;
 
             case 2:
-                system(LIMPAR_TELA);
+                system("cls");
                 tocar_musica();
                 printf("\nPressione Enter para continuar...");
                 getchar(); getchar();
