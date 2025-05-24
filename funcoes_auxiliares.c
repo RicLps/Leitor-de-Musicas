@@ -95,7 +95,50 @@ void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_music
     for (int i = 0; i < total_musicas; i++) { // percorre todos as musicas do sistema 
         if (lista_musicas[i].id == id_musica) { // e vê se o id inserido pelo utilizador existe.
             pesquisa_musica = 1; // serve como condição de paragem do for
-//Ainda incompleto; Ass: Messi.
+albuns[escolha_album].id_musica[albuns[escolha_album].total_musicas] = id_musica; // aqui adiciona o Id da música selecionada pelo usuario na próxima posição livre da lista de musicas do álbum escolhido tambem pelo usuario
+
+ albuns[escolha_album].total_musicas++; // aumenta o total de musicas  que o album escolhido tem
+
+printf("A música com Id %d foi adicionada ao álbum %s.\n", id_musica, albuns[escolha_album].nome);
+            break;
+        }
+    }
+
+
+void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
+    if (total_albuns == 0) {
+        printf("Nenhum álbum foi criado. \n");
+        return;
+    }
+
+    int id_album;
+    printf("Escolha o id do álbum: \n");
+    for (int i = 0; i < total_albuns; i++) {
+        printf("Id: %d - Álbum: %s", i, albuns[i].nome);
+    }
+  scanf("%d", &id_album);
+
+
+    if (id_album < 0 || id_album >= total_albuns) {
+        printf("Álbum inválido. \n");
+        return;
+}
+
+if (albuns[id_album].total_musicas == 0) {
+    printf("O álbum não tem nenhuma músicas. \n");
+    return;
+}
+
+printf("Músicas do álbum %s: \n", albuns[id_album].nome);
+for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as músicas dentro do álbum escolhido pelo utilizador
+    for (int j = 0; j < total_musicas; j++) { // Veja todas as musicas do sistema no total_musicas
+        if (lista_musicas[j].id == albuns[id_album].id_musica[i]) { // compara o ID da música do álbum com os Ides da lista total de musicas do sistema
+            printf("Id: %d - Nome: %s", lista_musicas[j].id, lista_musicas[j].nome); // caso a condição for verdadeira, imprime as o id e o nome da musica encontrada
+            break;
+        }
+    }
+}
+
 
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
