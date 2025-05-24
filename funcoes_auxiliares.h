@@ -23,7 +23,7 @@ typedef struct {
     int total_musicas;
 } Album;
 
-int adicionar(Musica lista[], int total);
+void adicionar(Musica lista[], int total);
 void listar(Musica lista[], int total);
-int eliminar(Musica lista[], int total);
+void eliminar(Musica lista[], int total);
 void tocar_musica();
