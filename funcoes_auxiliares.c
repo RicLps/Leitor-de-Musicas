@@ -5,7 +5,7 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
 
-void adicionar(Musica lista_musicas[ ], int *total) { //  total armazena a lista de músicas disponíveis
+void adicionar(Musica lista_musicas[], int *total) { //  total armazena a lista de músicas disponíveis
 
     if (*total >= MAX_MUSICAS) {
         printf("A lista de músicas está cheia.\n");
