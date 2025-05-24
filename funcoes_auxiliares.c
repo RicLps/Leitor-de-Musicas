@@ -2,38 +2,50 @@
 #include <stdio.h>
 #include <string.h>
 
-void adicionar(Musica lista_musicas[], int *total) { //  o *total armazena a lista de músicas disponíveis;
+#include "funcoes_auxiliares.h"
+#include <stdio.h>
 
-      if (*total >= MAX_MUSICAS) { // verifica se a lista de musicas está cheia;
-              printf("A lista de músicas está cheia.\n");
-              return;
-      }
+void adicionar(Musica lista_musicas[ ], int *total) { //  total armazena a lista de músicas disponíveis
 
-      Musica musica_nova; // crie uma "Variavel" musica_ nova (dentro do struct Musica) que contem todos os atributos de Musica por exemplo id;
-      
-      musica_nova.id = *total + 1;  // adiciona o id da musica na lista de musicas (*total) 
-      
-      printf("Insira o nome da musica: \n");
-      fgets(musica_nova.nome, TAM_NOME, stdin);
-      
-      printf("Insira o nome do artista da musica: \n");
-      fgets(musica_nova.artista, TAM_ARTISTA, stdin);
-      
-      printf("Insira o gênero musical da música que está a inserir: \n");
-      fgets(musica_nova.genero, TAM_GENERO, stdin);
-      
-      printf("Insira a duração da música (em segundos): \n");
-      scanf("%d", &musica_nova.duracao);
-      
-      lista_musicas[*total] = musica_nova;
-      (*total)++;
+    if (*total >= MAX_MUSICAS) {
+        printf("A lista de músicas está cheia.\n");
+        return;
+    }
 
-      f = fopen("arquivo_musicas.txt", "w");
+Musica musica_nova; // crie uma 2 que contem todos os atributos de Musica2
 
+musica_nova.id = *total + 1;  // adiciona o id da musica na lista de musicas (total) 
 
-      fclose(file);
-      printf("Música adicionada na lista de músicas com sucesso! \n");
-      
+printf(“Insira o nome da musica: \n”);
+fgets(musica_nova.nome, TAM_NOME, stdin);
+
+ printf("Insira o nome do artista da musica: \n");
+fgets(musica_nova.artista, TAM_ARTISTA, stdin);
+
+printf("Insira o gênero musical da música que está a inserir: \n");
+fgets(musica_nova.genero, TAM_GENERO, stdin);
+
+printf("Insira a duração da música (em segundos): \n");
+scanf("%d", &musica_nova.duracao);
+
+lista_musicas[*total] = musica_nova;
+(*total)++;
+
+FILE *f = fopen("arquivo_musicas.txt", "a");
+if (f == NULL) {
+    printf("Erro ao abrir o arquivo “arquivo_musicas.txt” ");
+    return;
+}
+
+fprintf(f, "Id da música: %d\n", musica_nova.id);
+fprintf(f, "Nome: %s", musica_nova.nome);
+fprintf(f, "Artista: %s", musica_nova.artista);
+fprintf(f, "Gênero: %s", musica_nova.genero);
+fprintf(f, "Duração: %ds\n", musica_nova.duracao);
+fprintf(f, "------------------------------------------------------\n");
+
+fclose(f); 
+printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 }
 
 
