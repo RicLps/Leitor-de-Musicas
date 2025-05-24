@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int validarDados(const char *entrada){
+void validarDados(const char *entrada){
 	int len = strlen(entrada);
 
 
@@ -24,26 +24,10 @@ int validarDados(const char *entrada){
 		return 1;
 	}
 
- 	//Não deixar nome em branco / vazio
+ 	//Não deixar texto em branco / vazio
 	if (strspn(entrada, " ") == len){
 	   printf("Atenção: Insira algum caracter válido");
 		return 0;
 	}
 	
 }
-
-
-int main(){
-	char nome[100];
-
-	printf("Digite o nome da música e o artista:\n");
-	fgets(nome, sizeof(nome), stdin);
-	nome[strcspn(nome, "\n")] = '\0';
-
-	if(validarDados(nome)){
-		}else{
-			printf("\nPor Favor, Insira Um Nome Válido!\n");
-		}
-	
-		return 0;
-	}
