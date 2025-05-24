@@ -28,7 +28,7 @@ void adicionar(Musica lista_musicas[], int *total) { //  o *total armazena a lis
       lista_musicas[*total] = musica_nova;
       (*total)++;
 
-      f = fopen("arquivo_musicas.txt", "w") as file;
+      f = fopen("arquivo_musicas.txt", "w");
 
 
       fclose(file);
@@ -103,7 +103,7 @@ printf("A música com Id %d foi adicionada ao álbum %s.\n", id_musica, albuns[e
             break;
         }
     }
-
+}
 
 void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
     if (total_albuns == 0) {
@@ -138,7 +138,7 @@ for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as mú
         }
     }
 }
-
+}
 
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
@@ -163,7 +163,7 @@ void eliminar(Musica lista_musicas[], int *total) {
       }
       
       if(musica_encontrada == 0){ // caso a musica não for encontrada, ou seja, quando musica_encontrada for igual a zero, mostra msg que a musica que o utilizador quer remover não existe
-            printf(“A música com id %d não foi encontrada na lista de músicas.”, id);
+            printf("A música com id %d não foi encontrada na lista de músicas.", id);
       }   
 }
 
