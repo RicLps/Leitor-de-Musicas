@@ -5,6 +5,14 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
 
+#ifdef _WIN32
+    #include <windows.h>
+    #define PAUSE(x) Sleep(x)
+#else
+    #include <unistd.h>
+    #define PAUSE(x) sleep((x)/1000)
+#endif
+
 void adicionar(Musica lista_musicas[], int *total) { //  total armazena a lista de músicas disponíveis
 
     if (*total >= MAX_MUSICAS) {
@@ -49,9 +57,23 @@ printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 }
 
 
-void listar(){
-    
+/*void listar(Musica lista[], int total) {
+    if (total == 0) {
+        printf("Nenhuma música cadastrada.\n");
+        return;
+    }
+
+    printf("\n+========= Lista de Músicas =========+\n");
+    for (int i = 0; i < total; i++) {
+        printf("ID: %d\n", lista[i].id);
+        printf("Nome: %s", lista[i].nome);
+        printf("Artista: %s", lista[i].artista);
+        printf("Gênero: %s", lista[i].genero);
+        printf("Duração: %d segundos\n", lista[i].duracao);
+        printf("-------------------------------------\n");
+    }
 }
+*/
 
 void criar_album(Album albuns[], int *total_albuns) {
     if (*total_albuns >= MAX_ALBUNS) {
@@ -179,3 +201,113 @@ void eliminar(Musica lista_musicas[], int *total) {
       }   
 }
 
+
+/*void tocar_musica(Musica lista[], int total) {
+    if (total == 0) {
+        printf("Nenhuma música disponível para tocar.\n");
+        return;
+    }
+
+    int id_tocar;
+    printf("Digite o ID da música que deseja tocar: ");
+    scanf("%d", &id_tocar);
+
+    for (int i = 0; i < total; i++) {
+        if (lista[i].id == id_tocar) {
+            printf("\n A tocar...\n");
+            printf("Nome: %s", lista[i].nome);
+            printf("Artista: %s", lista[i].artista);
+            printf("Duração: %d segundos\n", lista[i].duracao);
+            return;
+        }
+    }
+
+    printf("Música com ID %d não encontrada.\n", id_tocar);
+}
+*/
+
+void tocar_musica(Musica lista[], int total) {
+    int opcao;
+
+    do {
+        system("cls");
+        printf("\n+===============================+\n");
+        printf("|           Tocar Música        |\n");
+        printf("+===============================+\n");
+        printf("| 1. Listar músicas             |\n");
+        printf("| 2. Tocar música por ID        |\n");
+        printf("| 0. Voltar                     |\n");
+        printf("+===============================+\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+        getchar();  // limpa o buffer
+
+        switch (opcao) {
+            case 1:
+                if (total == 0) {
+                    printf("Nenhuma música cadastrada.\n");
+                } else {
+                    printf("\n+========= Lista de Músicas =========+\n");
+                    for (int i = 0; i < total; i++) {
+                        printf("ID: %d\n", lista[i].id);
+                        printf("Nome: %s", lista[i].nome);
+                        printf("Artista: %s", lista[i].artista);
+                        printf("Gênero: %s", lista[i].genero);
+                        printf("Duração: %d segundos\n", lista[i].duracao);
+                        printf("-------------------------------------\n");
+                    }
+                }
+                break;
+
+            case 2: {
+                if (total == 0) {
+                    printf("Nenhuma música disponível para tocar.\n");
+                    break;
+                }
+
+                int id_tocar;
+                printf("Digite o ID da música que deseja tocar: ");
+                scanf("%d", &id_tocar);
+                getchar(); // limpa buffer
+
+                int encontrada = 0;
+
+                for (int i = 0; i < total; i++) {
+                    if (lista[i].id == id_tocar) {
+                        printf("\n🎵 A tocar...\n");
+                        printf("Nome: %s", lista[i].nome);
+                        printf("Artista: %s", lista[i].artista);
+                        printf("Duração: %d segundos\n\n", lista[i].duracao);
+
+                        for (int j = 0; j < lista[i].duracao && j < 10; j++) {
+                            if (j % 2 == 0) printf("\r/");
+                            else printf("\r\\");
+                            fflush(stdout);
+                            PAUSE(1000);
+                        }
+
+                        printf("\rMúsica finalizada!\n");
+                        encontrada = 1;
+                        break;
+                    }
+                }
+
+                if (!encontrada)
+                    printf("Música com ID %d não encontrada.\n", id_tocar);
+                break;
+            }
+
+            case 0:
+                break;
+
+            default:
+                printf("Opção inválida.\n");
+        }
+
+        if (opcao != 0) {
+            printf("\nPressione Enter para continuar...");
+            getchar();
+        }
+
+    } while (opcao != 0);
+}
