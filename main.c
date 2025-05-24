@@ -54,7 +54,7 @@ int main() {
 
             case 2:
                 system("cls");
-                tocar_musica();
+                tocar_musica(lista, total);
                 printf("\nPressione Enter para continuar...");
                 getchar(); getchar();
                 break;
