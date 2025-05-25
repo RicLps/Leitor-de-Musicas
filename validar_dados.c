@@ -8,8 +8,8 @@ void validarDados(const char *entrada){
 
 
 	//Verificar a qntd de caracteres
-	if(len < 3 || len > 100){
-		printf("Atenção: O nome deve ter entre 3 a 100 caracteres");
+	if(len < 3 || len > 50){
+		printf("Atenção: O nome deve ter entre 3 a 50 caracteres");
 		return 0;
 	}
 
