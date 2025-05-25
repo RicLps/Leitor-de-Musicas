@@ -2,13 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Qntd máxima de músicas a serem armazenadas
 #define MAX_MUSICAS 100
 
 int main() {
+    //Array que armazena todas as musicas inseridas
     Musica lista[MAX_MUSICAS];
     int total = 0;
     int opcao, subopcao;
 
+    //Menu principal
     do {
         system("cls");
         printf("\n+===============================+\n");
@@ -22,6 +25,7 @@ int main() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
+        //Sistema de sub-menus para cada uma das opções acima
         switch (opcao) {
             case 1:
                 do {
@@ -38,6 +42,7 @@ int main() {
                     printf("Escolha uma opção: ");
                     scanf("%d", &subopcao);
 
+                    //Opções que chamam as diferentes funções do sistema
                     switch (subopcao) {
                         case 1: adicionar(lista, &total); break;    
                         case 2: listar(lista, total); break;
@@ -61,7 +66,7 @@ int main() {
                 printf("\nPressione Enter para continuar...");
                 getchar(); getchar();
                 break;
-
+            //Sistema de sub-menus que lidam com a manipulação de albuns
             case 3:
              do {
                     system("cls");
@@ -77,7 +82,7 @@ int main() {
                     printf("Escolha uma opção: \n");
                     scanf("%d", &subopcao);
                     getchar();
-                 
+                         //Switch case que apresenta as funções relacionadas a manipulação de albuns
                         switch (subopcao) {
                         case 1: criar_album(albuns, &total_albuns); break;
                         case 2: adicionar_musica_album(albuns, total_albuns, lista, total); break;
@@ -86,7 +91,7 @@ int main() {
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }
-
+//Volta para o menu anterior
  if (subopcao != 0) {
                         printf("\nPressione Enter para continuar...");
                         getchar();
@@ -99,7 +104,7 @@ int main() {
             case 0:
                 printf("Saindo...\n");
                 break;
-
+            //Verifica se a opção inserida for inválida
             default:
                 printf("Opção inválida.\n");
                 printf("Pressione Enter para continuar...");
