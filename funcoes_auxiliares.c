@@ -176,6 +176,7 @@ for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as mú
         }
       }
    }
+}
 void remover_musica_album(Album albuns[], int total_albuns) {
     if (total_albuns == 0) {
         printf("Nenhum álbum foi criado ainda.\n");
