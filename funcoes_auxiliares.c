@@ -1,9 +1,7 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
 #include <string.h>
-
 #include "funcoes_auxiliares.h"
-#include <stdio.h>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -231,7 +229,7 @@ void remover_musica_album(Album albuns[], int total_albuns) {
         }
     }
 
-    if (!encontrada) {
+    if (!encontrado) {
         printf("A música com Id %d não foi encontrada dentro do álbum. \n", id_musica_remover);
     }
   }
@@ -266,7 +264,6 @@ void eliminar(Musica lista_musicas[], int *total) {
       if(musica_encontrada == 0){ // caso a musica não for encontrada, ou seja, quando musica_encontrada for igual a zero, mostra msg que a musica que o utilizador quer remover não existe
             printf("A música com id %d não foi encontrada na lista de músicas.", id);
       }   
-}
 FILE *f_temp = fopen("temp.txt", "w");
     if (f_temp == NULL) {
         printf("Erro ao criar arquivo temporário (temp.txt). \n");
