@@ -310,6 +310,57 @@ FILE *f_temp = fopen("temp.txt", "w");
 }
 */
 
+void editar(Musica lista[], int total) {
+    int id, encontrada = 0;
+
+    printf("Digite o ID da música que deseja editar: \n");
+    scanf("%d", &id);
+    getchar(); // limpar buffer
+
+    for (int i = 0; i < total; i++) {
+        if (lista[i].id == id) {
+            encontrada = 1;
+
+            printf("Novo nome da música: ");
+            fgets(lista[i].nome, TAM_NOME, stdin);
+
+            printf("Novo artista: ");
+            fgets(lista[i].artista, TAM_ARTISTA, stdin);
+
+            printf("Nova duração (em segundos): ");
+            scanf("%d", &lista[i].duracao);
+            getchar(); // limpar buffer
+
+            printf("Música com ID %d editada com sucesso!\n", id);
+            break;
+        }
+    }
+
+    if (!encontrada) {
+        printf("Música com ID %d não foi encontrada.\n", id);
+        return;
+    }
+
+    // Atualizar arquivo
+    FILE *f_temp = fopen("temp.txt", "w");
+    if (f_temp == NULL) {
+        printf("Erro ao criar arquivo temporário (temp.txt). \n");
+        return;
+    }
+
+    for (int i = 0; i < total; i++) {
+        fprintf(f_temp, "Id da música: %d\n", lista[i].id);
+        fprintf(f_temp, "Nome: %s", lista[i].nome);
+        fprintf(f_temp, "Artista: %s", lista[i].artista);
+        fprintf(f_temp, "Gênero: %s", lista[i].genero);
+        fprintf(f_temp, "Duração: %ds\n", lista[i].duracao);
+        fprintf(f_temp, "------------------------------------------------------\n");
+    }
+
+    fclose(f_temp);
+    remove("arquivo_musicas.txt");
+    rename("temp.txt", "arquivo_musicas.txt");
+}
 
 
 void tocar_musica(Musica lista[], int total) {
