@@ -200,6 +200,24 @@ void eliminar(Musica lista_musicas[], int *total) {
             printf("A música com id %d não foi encontrada na lista de músicas.", id);
       }   
 }
+FILE *f_temp = fopen("temp.txt", "w");
+    if (f_temp == NULL) {
+        printf("Erro ao criar arquivo temporário (temp.txt). \n");
+        return;
+    }
+
+    for (int i = 0; i < *total; i++) {
+        fprintf(f_temp, "Id da música: %d\n", lista_musicas[i].id);
+        fprintf(f_temp, "Nome: %s", lista_musicas[i].nome);
+        fprintf(f_temp, "Artista: %s", lista_musicas[i].artista);
+        fprintf(f_temp, "Gênero: %s", lista_musicas[i].genero);
+        fprintf(f_temp, "Duração: %ds\n", lista_musicas[i].duracao);
+        fprintf(f_temp, "------------------------------------------------------ \n");
+    }
+    fclose(f_temp);
+    remove("arquivo_musicas.txt");
+    rename("temp.txt", "arquivo_musicas.txt");
+}
 
 
 /*void tocar_musica(Musica lista[], int total) {
