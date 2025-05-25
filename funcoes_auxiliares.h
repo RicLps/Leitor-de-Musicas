@@ -30,4 +30,6 @@ void tocar_musica(Musica lista[], int total);
 void criar_album(Album albuns[], int *total_albuns);
 void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
 void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
+void remover_musica_album(Album albuns[], int total_albuns);
+
 
