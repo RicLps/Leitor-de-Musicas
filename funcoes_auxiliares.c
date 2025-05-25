@@ -177,8 +177,64 @@ for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as mú
             printf("Id: %d - Nome: %s", lista_musicas[j].id, lista_musicas[j].nome); // caso a condição for verdadeira, imprime as o id e o nome da musica encontrada
             break;
         }
+      }
+   }
+void remover_musica_album(Album albuns[], int total_albuns) {
+    if (total_albuns == 0) {
+        printf("Nenhum álbum foi criado ainda.\n");
+        return;
     }
-}
+
+    int id_album;
+    printf("Escolha o id do álbum para remover a música: \n");
+    for (int i = 0; i < total_albuns; i++) {
+        printf("Id: %d - Álbum: %s", i, albuns[i].nome);
+    }
+
+    scanf("%d", &id_album);
+    getchar(); 
+
+    if (id_album < 0 || id_album >= total_albuns) {
+        printf("Album com id %d não existe.\n", id_album);
+        return;
+    }
+
+    if (albuns[id_album].total_musicas == 0) {
+        printf("O álbum não tem nenhuma música ainda.\n");
+        return;
+    }
+
+    printf("Músicas do álbum %s:\n", albuns[id_album].nome);
+    for (int i = 0; i < albuns[id_album].total_musicas; i++) {
+        printf("Posiçao %d - Id da música: %d\n", i, albuns[id_album].id_musica[i]); // posição indica a ordem da música dentro do album
+    }
+
+    int id_musica_remover;
+    printf("Insira o id da música que quer remover do álbum: \n");
+    scanf("%d", &id_musica_remover);
+
+    int encontrado = 0;
+
+    for (int i = 0; i < albuns[id_album].total_musicas; i++) {
+        if (albuns[id_album].id_musica[i] == id_musica_remover) {
+            encontrado = 1;
+
+        
+            for (int j = i; j < albuns[id_album].total_musicas - 1; j++) {
+                albuns[id_album].id_musica[j] = albuns[id_album].id_musica[j + 1];
+            }
+
+            albuns[id_album].total_musicas--;
+
+            printf("Música com Id %d removida do álbum %s. \n", id_musica_remover, albuns[id_album].nome);
+            break;
+        }
+    }
+
+    if (!encontrada) {
+        printf("A música com Id %d não foi encontrada dentro do álbum. \n", id_musica_remover);
+    }
+  }
 }
 
 
