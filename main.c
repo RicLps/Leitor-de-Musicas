@@ -16,6 +16,7 @@ int main() {
         printf("+===============================+\n");
         printf("| 1. Gerenciar Músicas          |\n");
         printf("| 2. Tocar Música               |\n");
+        printf("| 3. Gerenciar Albuns           |\n");
         printf("| 0. Sair                       |\n");
         printf("+===============================+\n");
         printf("Escolha uma opção: ");
@@ -58,6 +59,23 @@ int main() {
                 printf("\nPressione Enter para continuar...");
                 getchar(); getchar();
                 break;
+
+            case 3:
+             do {
+                    system("cls");
+                    printf("\n+===============================+\n");
+                    printf("|         Gerenciar Álbuns      |\n");
+                    printf("+===============================+\n");
+                    printf("| 1. Criar álbum                |\n");
+                    printf("| 2. Adicionar música ao álbum  |\n");
+                    printf("| 3. Listar músicas de álbum    |\n");
+                    printf("| 4. Remover música do álbum    |\n");
+                    printf("| 0. Voltar                     |\n");
+                    printf("+===============================+\n");
+                    printf("Escolha uma opção: ");
+                    scanf("%d", &subopcao);
+                    getchar();
+                // a terminar
 
             case 0:
                 printf("Saindo...\n");
