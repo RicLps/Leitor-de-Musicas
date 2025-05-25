@@ -13,6 +13,8 @@
     #define PAUSE(x) sleep((x)/1000)
 #endif
 
+
+
 void adicionar(Musica lista_musicas[], int *total) { //  total armazena a lista de músicas disponíveis
 
     if (*total >= MAX_MUSICAS) {
@@ -57,6 +59,8 @@ printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 }
 
 
+
+
 /*void listar(Musica lista[], int total) {
     if (total == 0) {
         printf("Nenhuma música cadastrada.\n");
@@ -74,6 +78,9 @@ printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
     }
 }
 */
+
+
+
 
 void criar_album(Album albuns[], int *total_albuns) {
     if (*total_albuns >= MAX_ALBUNS) {
@@ -174,6 +181,10 @@ for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as mú
 }
 }
 
+
+
+
+
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
       int musica_encontrada = 0;
@@ -220,6 +231,8 @@ FILE *f_temp = fopen("temp.txt", "w");
 }
 
 
+
+
 /*void tocar_musica(Musica lista[], int total) {
     if (total == 0) {
         printf("Nenhuma música disponível para tocar.\n");
@@ -243,6 +256,8 @@ FILE *f_temp = fopen("temp.txt", "w");
     printf("Música com ID %d não encontrada.\n", id_tocar);
 }
 */
+
+
 
 void tocar_musica(Musica lista[], int total) {
     int opcao;
