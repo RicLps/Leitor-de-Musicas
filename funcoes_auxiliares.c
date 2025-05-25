@@ -11,7 +11,7 @@
 #endif
 
 
-
+//Função que adiciona uma música ao arquivo de texto
 void adicionar(Musica lista_musicas[], int *total) { //  total armazena a lista de músicas disponíveis
 
     if (*total >= MAX_MUSICAS) {
@@ -23,10 +23,11 @@ Musica musica_nova; // crie uma 2 que contem todos os atributos de Musica2
 
 musica_nova.id = *total + 1;  // adiciona o id da musica na lista de musicas (total) 
 
-printf(“Insira o nome da musica: \n”);
+//Pede os dados da música ao utilizador
+printf("Insira o nome da musica: \n");
 fgets(musica_nova.nome, TAM_NOME, stdin);
 
- printf("Insira o nome do artista da musica: \n");
+printf("Insira o nome do artista da musica: \n");
 fgets(musica_nova.artista, TAM_ARTISTA, stdin);
 
 printf("Insira o gênero musical da música que está a inserir: \n");
@@ -38,12 +39,16 @@ scanf("%d", &musica_nova.duracao);
 lista_musicas[*total] = musica_nova;
 (*total)++;
 
+//Abre o arquivo que guarda as músicas
 FILE *f = fopen("arquivo_musicas.txt", "a");
+
+//Verifica se deu erro ou não ao abrir o arquivo
 if (f == NULL) {
     printf("Erro ao abrir o arquivo “arquivo_musicas.txt” ");
     return;
 }
 
+//Escreve os dados inseridos pelo utilizador no arquivo
 fprintf(f, "Id da música: %d\n", musica_nova.id);
 fprintf(f, "Nome: %s", musica_nova.nome);
 fprintf(f, "Artista: %s", musica_nova.artista);
@@ -51,6 +56,7 @@ fprintf(f, "Gênero: %s", musica_nova.genero);
 fprintf(f, "Duração: %ds\n", musica_nova.duracao);
 fprintf(f, "------------------------------------------------------\n");
 
+//Fecha o arquivo
 fclose(f); 
 printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 }
@@ -78,9 +84,11 @@ printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 
 
 
-
+//Função que cria um novo album
 void criar_album(Album albuns[], int *total_albuns) {
-    if (*total_albuns >= MAX_ALBUNS) {
+
+//Verifica se ultrapassou-se o número máximo de albuns
+if (*total_albuns >= MAX_ALBUNS) {
         printf("Não é possível criar álbum porque você excedeu o limite de criação de albuns.\n");
         return;
 }
@@ -115,6 +123,7 @@ void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_music
         return;
     }
 
+//Verifica se o album já atingiu o limite máximo de músicas
     if (albuns[escolha_album].total_musicas >= MAX_MUSICAS_ALBUM) {
         printf("O álbum já atingiu o limite máximo de 100 músicas.\n");
         return;
@@ -177,7 +186,10 @@ for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as mú
       }
    }
 }
+
+//Função que remove uma música de um album
 void remover_musica_album(Album albuns[], int total_albuns) {
+    //Verifica se há algum album
     if (total_albuns == 0) {
         printf("Nenhum álbum foi criado ainda.\n");
         return;
@@ -192,11 +204,13 @@ void remover_musica_album(Album albuns[], int total_albuns) {
     scanf("%d", &id_album);
     getchar(); 
 
+    //Verifica se o id isnserido está correto
     if (id_album < 0 || id_album >= total_albuns) {
         printf("Album com id %d não existe.\n", id_album);
         return;
     }
 
+    //Verifica se há músicas no album selecionado
     if (albuns[id_album].total_musicas == 0) {
         printf("O álbum não tem nenhuma música ainda.\n");
         return;
@@ -229,6 +243,7 @@ void remover_musica_album(Album albuns[], int total_albuns) {
         }
     }
 
+    //Caso a música não tenha sido encontrada no album
     if (!encontrado) {
         printf("A música com Id %d não foi encontrada dentro do álbum. \n", id_musica_remover);
     }
@@ -238,7 +253,7 @@ void remover_musica_album(Album albuns[], int total_albuns) {
 
 
 
-
+//Função que elimina uma música do arquivo de registro
 void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
       int musica_encontrada = 0;
@@ -264,6 +279,8 @@ void eliminar(Musica lista_musicas[], int *total) {
       if(musica_encontrada == 0){ // caso a musica não for encontrada, ou seja, quando musica_encontrada for igual a zero, mostra msg que a musica que o utilizador quer remover não existe
             printf("A música com id %d não foi encontrada na lista de músicas.", id);
       }   
+
+//Cria um arquivo temporário e adiciona todas as músicas, menos a que foi escolhida pelo utilizador para ser eliminada
 FILE *f_temp = fopen("temp.txt", "w");
     if (f_temp == NULL) {
         printf("Erro ao criar arquivo temporário (temp.txt). \n");
@@ -279,6 +296,8 @@ FILE *f_temp = fopen("temp.txt", "w");
         fprintf(f_temp, "------------------------------------------------------ \n");
     }
     fclose(f_temp);
+
+    //Remove o arquivo antigo desatualizado e renomeia o arquivo temporário para o nome antigo
     remove("arquivo_musicas.txt");
     rename("temp.txt", "arquivo_musicas.txt");
 }
@@ -310,6 +329,7 @@ FILE *f_temp = fopen("temp.txt", "w");
 }
 */
 
+//Função que edita as informações da música escolhida pelo utilizador
 void editar(Musica lista[], int total) {
     int id, encontrada = 0;
 
@@ -317,6 +337,7 @@ void editar(Musica lista[], int total) {
     scanf("%d", &id);
     getchar(); // limpar buffer
 
+    //Pede ao utilizador as informações novas da música
     for (int i = 0; i < total; i++) {
         if (lista[i].id == id) {
             encontrada = 1;
@@ -341,7 +362,7 @@ void editar(Musica lista[], int total) {
         return;
     }
 
-    // Atualizar arquivo
+    //Cria um arquivo temporário e adiciona todas as músicas, menos a que foi escolhida pelo utilizador para ser eliminada
     FILE *f_temp = fopen("temp.txt", "w");
     if (f_temp == NULL) {
         printf("Erro ao criar arquivo temporário (temp.txt). \n");
@@ -358,12 +379,14 @@ void editar(Musica lista[], int total) {
     }
 
     fclose(f_temp);
+
+    //Remove o arquivo antigo desatualizado e renomeia o arquivo temporário para o nome antigo
     remove("arquivo_musicas.txt");
     rename("temp.txt", "arquivo_musicas.txt");
 }
 
-
-void tocar_musica(Musica lista[], int total) {
+//Função que lista as músicas e simula a ação de tocar determinada música
+void tocar_musica(Musica lista[], int total){
     int opcao;
 
     do {
@@ -385,7 +408,8 @@ void tocar_musica(Musica lista[], int total) {
                     printf("Nenhuma música cadastrada.\n");
                 } else {
                     printf("\n+========= Lista de Músicas =========+\n");
-                    for (int i = 0; i < total; i++) {
+            //Lista  todas as músicas
+            for (int i = 0; i < total; i++) {
                         printf("ID: %d\n", lista[i].id);
                         printf("Nome: %s", lista[i].nome);
                         printf("Artista: %s", lista[i].artista);
@@ -409,9 +433,10 @@ void tocar_musica(Musica lista[], int total) {
 
                 int encontrada = 0;
 
+                //Simulação de tocar música
                 for (int i = 0; i < total; i++) {
                     if (lista[i].id == id_tocar) {
-                        printf("\n🎵 A tocar...\n");
+                        printf("\nA tocar...\n");
                         printf("Nome: %s", lista[i].nome);
                         printf("Artista: %s", lista[i].artista);
                         printf("Duração: %d segundos\n\n", lista[i].duracao);
