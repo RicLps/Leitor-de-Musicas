@@ -38,9 +38,9 @@ int main() {
                     scanf("%d", &subopcao);
 
                     switch (subopcao) {
-                        case 1: adicionar(lista, total); break;
+                        case 1: adicionar(lista, &total); break;    
                         case 2: listar(lista, total); break;
-                        case 3: total = eliminar(lista, total); break;
+                        case 3: eliminar(lista, &total); break; 
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }
@@ -72,10 +72,27 @@ int main() {
                     printf("| 4. Remover música do álbum    |\n");
                     printf("| 0. Voltar                     |\n");
                     printf("+===============================+\n");
-                    printf("Escolha uma opção: ");
+                    printf("Escolha uma opção: \n");
                     scanf("%d", &subopcao);
                     getchar();
-                // a terminar
+                 
+                        switch (subopcao) {
+                        case 1: criar_album(albuns, &total_albuns); break;
+                        case 2: adicionar_musica_album(albuns, total_albuns, lista, total); break;
+                        case 3: listar_musicas_album(albuns, total_albuns, lista, total); break;
+                        case 4: remover_musica_album(albuns, total_albuns); break;
+                        case 0: break;
+                        default: printf("Opção inválida.\n"); break;
+                    }
+
+ if (subopcao != 0) {
+                        printf("\nPressione Enter para continuar...");
+                        getchar();
+                    }
+
+                } while (subopcao != 0);
+                break;
+
 
             case 0:
                 printf("Saindo...\n");
