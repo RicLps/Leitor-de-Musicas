@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+//Função que recebe o texto inserido pelo utilizador e verifica se está correto, seguindo alguns parâmetros
 int validarDados(const char *entrada){
 	int len = strlen(entrada);
 
