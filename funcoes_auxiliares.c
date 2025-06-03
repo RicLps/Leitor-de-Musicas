@@ -129,7 +129,7 @@ void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_music
         return;
     }
 
- printf("\ Músicas disponíveis: \n");
+ printf("Músicas disponíveis: \n");
     for(int i = 0; i < total_musicas; i++) { // aqui vai listar todas as musicas ja adicionadas no sistema.
        printf("Id: %d - Nome: %s", lista_musicas[i].id, lista_musicas[i].nome);
     }
