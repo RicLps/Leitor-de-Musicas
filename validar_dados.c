@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void validarDados(const char *entrada){
+int validarDados(const char *entrada){
 	int len = strlen(entrada);
 
 
@@ -21,7 +21,6 @@ void validarDados(const char *entrada){
 	     	printf("Atenção: Nome inválido, use soente letras, números, espaço, underscore e hífens.");
 	     	return 0;
 	     }
-		return 1;
 	}
 
  	//Não deixar texto em branco / vazio
@@ -29,5 +28,6 @@ void validarDados(const char *entrada){
 	   printf("Atenção: Insira algum caracter válido");
 		return 0;
 	}
-	
+
+	return 1;
 }
