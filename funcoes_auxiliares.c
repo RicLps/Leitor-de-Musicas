@@ -172,7 +172,7 @@ void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas
 }
 
 if (albuns[id_album].total_musicas == 0) {
-    printf("O álbum não tem nenhuma músicas. \n");
+    printf("O álbum não tem nenhuma música. \n");
     return;
 }
 
@@ -348,6 +348,9 @@ void editar(Musica lista[], int total) {
             printf("Novo artista: ");
             fgets(lista[i].artista, TAM_ARTISTA, stdin);
 
+            printf("Novo género: ");
+            fgets(lista[i].genero, TAM_ARTISTA, stdin);
+
             printf("Nova duração (em segundos): ");
             scanf("%d", &lista[i].duracao);
             getchar(); // limpar buffer
@@ -397,7 +400,7 @@ void tocar_musica(Musica lista[], int total){
         printf("| 1. Listar músicas             |\n");
         printf("| 2. Tocar música por ID        |\n");
         printf("| 0. Voltar                     |\n");
-        printf("+===============================+\n");
+        printf("+===============================+\n\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
         getchar();  // limpa o buffer
