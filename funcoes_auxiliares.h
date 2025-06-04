@@ -1,3 +1,4 @@
+#include <stdio.h>
 #define MAX_MUSICAS 100
 #define TAM_NOME 50
 #define TAM_ARTISTA 100
@@ -6,7 +7,6 @@
 #define NOME_ALBUM 50
 #define MAX_MUSICAS_ALBUM 100
  
-FILE *f; //Ponteiro para um arquivo
 int total = 0;
 
 //Struct que armazena os diferentes dados das músicas

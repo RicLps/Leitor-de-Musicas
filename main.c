@@ -8,6 +8,8 @@
 int main() {
     //Array que armazena todas as musicas inseridas
     Musica lista[MAX_MUSICAS];
+    Album albuns[MAX_ALBUNS]; 
+    int total_albuns = 0; 
     int total = 0;
     int opcao, subopcao;
 

@@ -247,7 +247,6 @@ void remover_musica_album(Album albuns[], int total_albuns) {
     if (!encontrado) {
         printf("A música com Id %d não foi encontrada dentro do álbum. \n", id_musica_remover);
     }
-  }
 }
 
 
@@ -262,7 +261,7 @@ void eliminar(Musica lista_musicas[], int *total) {
       scanf("%d", &id);
       
       for (int i = 0; i < *total; i++) { // Verifique todas as músicas do programa
-            if (lista_musicas[i].id == id) {
+            if(lista_musicas[i].id == id) {
                   musica_encontrada = 1; // mostra que a musica com o id que inserimos existe e foi encontrado e tambem serve como condição de paragem para que o prog não faça o if(musica_encontrada == 0){
             
                  
