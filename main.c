@@ -5,6 +5,8 @@
 //Qntd máxima de músicas a serem armazenadas
 #define MAX_MUSICAS 100
 
+int total = 0;
+
 int main() {
     //Array que armazena todas as musicas inseridas
     Musica lista[MAX_MUSICAS];
@@ -17,10 +19,10 @@ int main() {
     do {
         system("cls");
         printf("\n+===============================+\n");
-        printf("|      Leitor de Música em C    |\n");
+        printf("|      Leitor de Musica em C    |\n");
         printf("+===============================+\n");
-        printf("| 1. Gerenciar Músicas          |\n");
-        printf("| 2. Tocar Música               |\n");
+        printf("| 1. Gerenciar Musicas          |\n");
+        printf("| 2. Tocar Musica               |\n");
         printf("| 3. Gerenciar Albuns           |\n");
         printf("| 0. Sair                       |\n");
         printf("+===============================+\n");
@@ -33,12 +35,12 @@ int main() {
                 do {
                     system("cls");
                     printf("\n+===============================+\n");
-                    printf("|        Gerenciar Músicas      |\n");
+                    printf("|        Gerenciar Musicas      |\n");
                     printf("+===============================+\n");
-                    printf("| 1. Adicionar música           |\n");
-                    printf("| 2. Listar músicas             |\n");
-                    printf("| 3. Eliminar música            |\n");
-                    printf("| 4. Editar música              |\n");
+                    printf("| 1. Adicionar musica           |\n");
+                    printf("| 2. Listar musicas             |\n");
+                    printf("| 3. Eliminar musica            |\n");
+                    printf("| 4. Editar musica              |\n");
                     printf("| 0. Voltar                     |\n");
                     printf("+===============================+\n");
                     printf("Escolha uma opção: ");
@@ -72,15 +74,17 @@ int main() {
             case 3:
              do {
                     system("cls");
-                    printf("\n+===============================+\n");
-                    printf("|         Gerenciar Álbuns      |\n");
-                    printf("+===============================+\n");
-                    printf("| 1. Criar álbum                |\n");
-                    printf("| 2. Adicionar música ao álbum  |\n");
-                    printf("| 3. Listar músicas de álbum    |\n");
-                    printf("| 4. Remover música do álbum    |\n");
-                    printf("| 0. Voltar                     |\n");
-                    printf("+===============================+\n");
+                    printf("\n+==================================+\n");
+                    printf("|         Gerenciar Albuns         |\n");
+                    printf("+==================================+\n");
+                    printf("| 1. Criar Album                   |\n");
+                    printf("| 2. Adicionar Musica a um Album   |\n");
+                    printf("| 3. Listar Musicas de um Album    |\n");
+                    printf("| 4. Remover Musica do Album       |\n");
+                    printf("| 5. Apagar Album                  |\n");
+                    printf("| 6. Listar Albuns Criados         |\n");
+                    printf("| 0. Voltar                        |\n");
+                    printf("+==================================+\n");
                     printf("Escolha uma opção: \n");
                     scanf("%d", &subopcao);
                     getchar();
@@ -89,7 +93,9 @@ int main() {
                         case 1: criar_album(albuns, &total_albuns); break;
                         case 2: adicionar_musica_album(albuns, total_albuns, lista, total); break;
                         case 3: listar_musicas_album(albuns, total_albuns, lista, total); break;
-                        case 4: remover_musica_album(albuns, total_albuns); break;
+                        case 4: remover_musica_album(albuns, total_albuns, lista, total); break;
+                        case 5: apagar_album(albuns, &total_albuns); break;
+                        case 6: listar_albuns(albuns, total_albuns); break;
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }

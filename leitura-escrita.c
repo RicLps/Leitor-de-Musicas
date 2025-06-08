@@ -31,9 +31,10 @@ void escrever(const char *nome){
 }
 
 
-	int main(){
-	escrever("musica");
-	leitura("musica");
-	return 0;
-	}
+	// int main(){
+	//	escrever("musica");
+	// leitura("musica");
+	// return 0;
+	// }
+	
 	

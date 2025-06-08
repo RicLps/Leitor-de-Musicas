@@ -7,7 +7,7 @@
 #define NOME_ALBUM 50
 #define MAX_MUSICAS_ALBUM 100
  
-int total = 0;
+extern int total;
 
 //Struct que armazena os diferentes dados das músicas
 typedef struct {
@@ -34,5 +34,7 @@ void tocar_musica(Musica lista[], int total);
 void criar_album(Album albuns[], int *total_albuns);
 void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
 void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
-void remover_musica_album(Album albuns[], int total_albuns);
-void validarDados(const char *entrada);
+void remover_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
+void apagar_album(Album albuns[], int *total_albuns);
+void listar_albuns(Album albuns[], int total_albuns);
+int validarDados(const char *entrada);

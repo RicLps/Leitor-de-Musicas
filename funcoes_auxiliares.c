@@ -23,18 +23,24 @@ Musica musica_nova; // crie uma 2 que contem todos os atributos de Musica2
 
 musica_nova.id = *total + 1;  // adiciona o id da musica na lista de musicas (total) 
 
+getchar();
 //Pede os dados da música ao utilizador
-printf("Insira o nome da musica: \n");
+printf("Insira o nome da musica: ");
 fgets(musica_nova.nome, TAM_NOME, stdin);
+musica_nova.nome[strcspn(musica_nova.nome, "\n")] = 0;
 
-printf("Insira o nome do artista da musica: \n");
+printf("Insira o nome do artista da musica: ");
 fgets(musica_nova.artista, TAM_ARTISTA, stdin);
+musica_nova.artista[strcspn(musica_nova.artista, "\n")] = 0;
 
-printf("Insira o gênero musical da música que está a inserir: \n");
+printf("Insira o gênero musical da música: ");
 fgets(musica_nova.genero, TAM_GENERO, stdin);
+musica_nova.genero[strcspn(musica_nova.genero, "\n")] = 0;
 
-printf("Insira a duração da música (em segundos): \n");
+printf("Insira a duração da música (em segundos): ");
 scanf("%d", &musica_nova.duracao);
+getchar();
+
 
 lista_musicas[*total] = musica_nova;
 (*total)++;
@@ -50,9 +56,9 @@ if (f == NULL) {
 
 //Escreve os dados inseridos pelo utilizador no arquivo
 fprintf(f, "Id da música: %d\n", musica_nova.id);
-fprintf(f, "Nome: %s", musica_nova.nome);
-fprintf(f, "Artista: %s", musica_nova.artista);
-fprintf(f, "Gênero: %s", musica_nova.genero);
+fprintf(f, "Nome: %s\n", musica_nova.nome);
+fprintf(f, "Artista: %s\n", musica_nova.artista);
+fprintf(f, "Gênero: %s\n", musica_nova.genero);
 fprintf(f, "Duração: %ds\n", musica_nova.duracao);
 fprintf(f, "------------------------------------------------------\n");
 
@@ -62,25 +68,22 @@ printf("Música adicionada na lista de músicas e gravada no arquivo.\n");
 }
 
 
-
-
-/*void listar(Musica lista[], int total) {
+// Função Listar musicas do programa
+void listar(Musica lista[], int total) {
     if (total == 0) {
-        printf("Nenhuma música cadastrada.\n");
+        printf("Nenhuma música inserida no sistema.\n");
         return;
     }
-
-    printf("\n+========= Lista de Músicas =========+\n");
+    printf("\nLista de Músicas:\n");
     for (int i = 0; i < total; i++) {
         printf("ID: %d\n", lista[i].id);
-        printf("Nome: %s", lista[i].nome);
-        printf("Artista: %s", lista[i].artista);
-        printf("Gênero: %s", lista[i].genero);
+        printf("Nome: %s\n", lista[i].nome);
+        printf("Artista: %s\n", lista[i].artista);
+        printf("Género: %s\n", lista[i].genero);
         printf("Duração: %d segundos\n", lista[i].duracao);
-        printf("-------------------------------------\n");
+        printf("----------------------\n");
     }
 }
-*/
 
 
 
@@ -95,160 +98,257 @@ if (*total_albuns >= MAX_ALBUNS) {
  Album novo_album;
  novo_album.total_musicas = 0; // define o total_musicas = 0, já que não adicionamos músicas ainda.
 
-printf("Insira o nome do álbum á se criar (máximo 20 caracteres): \n");
+printf("Insira o nome do album a se criar (maximo 20 caracteres): ");
     fgets(novo_album.nome, NOME_ALBUM, stdin);
 
     albuns[*total_albuns] = novo_album; // vai adicionar um o álbum que criei na próxima posição livre do array albums.
     (*total_albuns)++; // aumenta o valor do *total_albuns para mostrar que um album foi criado dentor do *total_albuns
 
-printf("Álbum %s foi criado com sucesso. Lembre-se que um álbum aceita somente 100 músicas! \n", novo_album.nome);
+printf("\nAlbum '%s' foi criado com sucesso.\nLembre-se que um album aceita somente 100 musicas! \n", novo_album.nome);
 }
+
 void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
     if (total_albuns == 0) {
-        printf("Ainda não foi criado nenhum álbum. \n");
+        printf("Ainda não foi criado nenhum álbum.\n");
+        getchar(); 
         return;
     }
 
     int escolha_album;
-    printf("Escolha o álbum para adicionar músicas:\n");
+    printf("Escolha o album para adicionar músicas:\n");
     for (int i = 0; i < total_albuns; i++) {
-       printf("Id: %d - Álbum: %s\n", i, albuns[i].nome);  // nessa, indica o id do álbum e nome do álbum com o albuns[i].nome onde o albuns é um vetor de struct Albuns, que foi declarado em funcoes.auxiliares.h 
+        printf("Id: %d - Album: %s\n", i, albuns[i].nome);
     }
 
-    printf("Insira o id do álbum: \n");
-    scanf("%d", &escolha_album);
+    printf("Insira o id do álbum: ");
+    if (scanf("%d", &escolha_album) != 1) {
+        printf("Album Invalido.\n");
+        while (getchar() != '\n'); 
+        getchar(); 
+        return;
+    }
+    getchar(); 
 
-    if (escolha_album < 0 || escolha_album >= total_albuns) { // verifique se o album escolhido pelo usuario esta entre 0 e o numero de albuns criados.
-        printf("O álbum com id %d não existe.\n", escolha_album);
+    if (escolha_album < 0 || escolha_album >= total_albuns) {
+        printf("O Album com id %d não existe.\n", escolha_album);
+        getchar(); 
         return;
     }
 
-//Verifica se o album já atingiu o limite máximo de músicas
     if (albuns[escolha_album].total_musicas >= MAX_MUSICAS_ALBUM) {
         printf("O álbum já atingiu o limite máximo de 100 músicas.\n");
+        getchar(); 
         return;
     }
 
- printf("Músicas disponíveis: \n");
-    for(int i = 0; i < total_musicas; i++) { // aqui vai listar todas as musicas ja adicionadas no sistema.
-       printf("Id: %d - Nome: %s", lista_musicas[i].id, lista_musicas[i].nome);
+    printf("Musicas disponiveis:\n");
+    for (int i = 0; i < total_musicas; i++) {
+        printf("Id: %d - Nome: %s\n", lista_musicas[i].id, lista_musicas[i].nome);
     }
 
-  int id_musica;
-    printf("Insira o Id da música que deseja adicionar ao álbum: \n");
-    scanf("%d", &id_musica);
+    int id_musica;
+    printf("Insira o Id da musica que deseja adicionar ao album: ");
+    if (scanf("%d", &id_musica) != 1) {
+        printf("Id da musica Invalido.\n");
+        while (getchar() != '\n');
+        getchar();
+        return;
+    }
+    getchar();
 
- int pesquisa_musica = 0; // definimos uma variavel que vai nos indicar se o id da musica que o utilizador inseriu acima existe
-    for (int i = 0; i < total_musicas; i++) { // percorre todos as musicas do sistema 
-        if (lista_musicas[i].id == id_musica) { // e vê se o id inserido pelo utilizador existe.
-            pesquisa_musica = 1; // serve como condição de paragem do for
-albuns[escolha_album].id_musica[albuns[escolha_album].total_musicas] = id_musica; // aqui adiciona o Id da música selecionada pelo usuario na próxima posição livre da lista de musicas do álbum escolhido tambem pelo usuario
+    int pesquisa_musica = 0;
+    for (int i = 0; i < total_musicas; i++) {
+        if (lista_musicas[i].id == id_musica) {
+            pesquisa_musica = 1;
+            albuns[escolha_album].id_musica[albuns[escolha_album].total_musicas] = id_musica;
+            albuns[escolha_album].total_musicas++;
 
- albuns[escolha_album].total_musicas++; // aumenta o total de musicas  que o album escolhido tem
-
-printf("A música com Id %d foi adicionada ao álbum %s.\n", id_musica, albuns[escolha_album].nome);
+            printf("\nA musica com Id '%d' foi adicionada ao album '%s'.\n", id_musica, albuns[escolha_album].nome);
             break;
         }
     }
+
+    if (!pesquisa_musica) {
+        printf("A música com Id %d não foi encontrada.\n", id_musica);
+    }
+
+    printf("Pressione Enter para continuar...");
+    getchar(); 
 }
+
 
 void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
     if (total_albuns == 0) {
-        printf("Nenhum álbum foi criado. \n");
+        printf("Nenhum album foi criado.\n");
+        getchar(); 
         return;
     }
 
     int id_album;
-    printf("Escolha o id do álbum: \n");
-    for (int i = 0; i < total_albuns; i++) {
-        printf("Id: %d - Álbum: %s", i, albuns[i].nome);
-    }
-  scanf("%d", &id_album);
 
+    printf("\nAlbuns Disponiveis:\n");
+    for (int i = 0; i < total_albuns; i++) {
+        printf("Id: %d - Album: %s\n", i, albuns[i].nome);
+    }
+
+    printf("Escolha o id do Album: ");
+    if (scanf("%d", &id_album) != 1) {
+        printf("Album Invalido.\n");
+        while (getchar() != '\n'); 
+        getchar(); 
+    }
 
     if (id_album < 0 || id_album >= total_albuns) {
-        printf("Álbum inválido. \n");
+        printf("Album Invalido.\n");
+        getchar(); 
         return;
-}
+    }
 
-if (albuns[id_album].total_musicas == 0) {
-    printf("O álbum não tem nenhuma música. \n");
-    return;
-}
+    if (albuns[id_album].total_musicas == 0) {
+        printf("O album não tem nenhuma musica.\n");
+        getchar(); 
+        return;
+    }
 
-printf("Músicas do álbum %s: \n", albuns[id_album].nome);
-for (int i = 0; i < albuns[id_album].total_musicas; i++) { //  Veja todas as músicas dentro do álbum escolhido pelo utilizador
-    for (int j = 0; j < total_musicas; j++) { // Veja todas as musicas do sistema no total_musicas
-        if (lista_musicas[j].id == albuns[id_album].id_musica[i]) { // compara o ID da música do álbum com os Ides da lista total de musicas do sistema
-            printf("Id: %d - Nome: %s", lista_musicas[j].id, lista_musicas[j].nome); // caso a condição for verdadeira, imprime as o id e o nome da musica encontrada
-            break;
+    printf("\nMusicas do Album '%s': \n", albuns[id_album].nome);
+
+    for (int i = 0; i < albuns[id_album].total_musicas; i++) {
+        int id_musica = albuns[id_album].id_musica[i];
+        int encontrada = 0;
+
+        for (int j = 0; j < total_musicas; j++) {
+            if (lista_musicas[j].id == id_musica) {
+                printf("Id: %d - Nome: %s\n", lista_musicas[j].id, lista_musicas[j].nome);
+                encontrada = 1;
+                break;
+            }
         }
-      }
-   }
+
+        if (!encontrada) {
+            printf("Musica com ID %d não encontrada na lista de musicas.\n", id_musica);
+        }
+    }
+
+    printf("\nPressione Enter para continuar...");
+    getchar(); 
 }
+
 
 //Função que remove uma música de um album
-void remover_musica_album(Album albuns[], int total_albuns) {
-    //Verifica se há algum album
+void remover_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas) {
+    // Verifica se há algum álbum
     if (total_albuns == 0) {
-        printf("Nenhum álbum foi criado ainda.\n");
+        printf("Nenhum album foi criado ainda.\n");
         return;
     }
 
     int id_album;
-    printf("Escolha o id do álbum para remover a música: \n");
+    printf("Escolha o id do album para remover a musica: \n");
     for (int i = 0; i < total_albuns; i++) {
-        printf("Id: %d - Álbum: %s", i, albuns[i].nome);
+        printf("Id: %d - Album: %s\n", i, albuns[i].nome);
     }
 
     scanf("%d", &id_album);
     getchar(); 
 
-    //Verifica se o id isnserido está correto
+    // Verifica se o id inserido está correto
     if (id_album < 0 || id_album >= total_albuns) {
-        printf("Album com id %d não existe.\n", id_album);
+        printf("\nAlbum com id %d não existe.\n", id_album);
         return;
     }
 
-    //Verifica se há músicas no album selecionado
+    // Verifica se há músicas no álbum selecionado
     if (albuns[id_album].total_musicas == 0) {
-        printf("O álbum não tem nenhuma música ainda.\n");
+        printf("O Album não tem nenhuma musica ainda.\n");
         return;
     }
 
-    printf("Músicas do álbum %s:\n", albuns[id_album].nome);
+    // Lista as músicas do álbum mostrando o id e nome na mesma linha
+    printf("Musicas do album %s:\n", albuns[id_album].nome);
     for (int i = 0; i < albuns[id_album].total_musicas; i++) {
-        printf("Posiçao %d - Id da música: %d\n", i, albuns[id_album].id_musica[i]); // posição indica a ordem da música dentro do album
+        int id_musica = albuns[id_album].id_musica[i];
+
+        for (int j = 0; j < total_musicas; j++) {
+            if (lista_musicas[j].id == id_musica) {
+                printf("Posição %d - Id da musica: %d - Nome: %s\n", i, id_musica, lista_musicas[j].nome);
+                break;
+            }
+        }
     }
 
     int id_musica_remover;
-    printf("Insira o id da música que quer remover do álbum: \n");
+    printf("Insira o id da musica que quer remover do álbum: \n");
     scanf("%d", &id_musica_remover);
 
     int encontrado = 0;
 
+    // Procura a música para remover no álbum
     for (int i = 0; i < albuns[id_album].total_musicas; i++) {
         if (albuns[id_album].id_musica[i] == id_musica_remover) {
             encontrado = 1;
 
-        
+            // Remove a música do álbum deslocando as músicas seguintes para trás
             for (int j = i; j < albuns[id_album].total_musicas - 1; j++) {
                 albuns[id_album].id_musica[j] = albuns[id_album].id_musica[j + 1];
             }
 
             albuns[id_album].total_musicas--;
 
-            printf("Música com Id %d removida do álbum %s. \n", id_musica_remover, albuns[id_album].nome);
+            printf("Musica com Id %d removida do Album %s.\n", id_musica_remover, albuns[id_album].nome);
+            getchar();
             break;
         }
     }
 
-    //Caso a música não tenha sido encontrada no album
+    // Caso a música não tenha sido encontrada no álbum
     if (!encontrado) {
-        printf("A música com Id %d não foi encontrada dentro do álbum. \n", id_musica_remover);
+        printf("A musica com Id %d não foi encontrada dentro do album.\n", id_musica_remover);
     }
 }
 
+//Função que apaga um album
+void apagar_album(Album albuns[], int *total_albuns) {
+    if (*total_albuns == 0) {
+        printf("Nenhum album foi criado ainda.\n");
+        return;
+    }
+
+    int id_album;
+    printf("Escolha o id do album para apagar: \n");
+    for (int i = 0; i < *total_albuns; i++) {
+        printf("Id: %d - Album: %s\n", i, albuns[i].nome);
+    }
+
+    scanf("%d", &id_album);
+    getchar();
+
+    if (id_album < 0 || id_album >= *total_albuns) {
+        printf("Album com id %d não existe.\n", id_album);
+        return;
+    }
+
+    // t desloca os albuns para uma posicao para tras
+    for (int i = id_album; i < *total_albuns - 1; i++) {
+        albuns[i] = albuns[i + 1];
+    }
+
+    (*total_albuns)--;  // reduz o total de albuns
+
+    printf("O Album com id %d apagado com sucesso.\n", id_album);
+}
+
+//Função que lista os albuns criados
+void listar_albuns(Album albuns[], int total_albuns) {
+    if (total_albuns == 0) {
+        printf("Nenhum album foi criado ainda.\n");
+        return;
+    }
+
+    printf("Lista de álbuns:\n"); 
+    for (int i = 0; i < total_albuns; i++) {
+        printf("Id: %d - Album: %s\n", i, albuns[i].nome);
+    }
+}
 
 
 
@@ -257,7 +357,7 @@ void eliminar(Musica lista_musicas[], int *total) {
       int id = 0;
       int musica_encontrada = 0;
       
-      printf("Digite o ID da música que deseja eliminar: \n");
+      printf("Digite o ID da musica que deseja eliminar: \n");
       scanf("%d", &id);
       
       for (int i = 0; i < *total; i++) { // Verifique todas as músicas do programa
@@ -343,12 +443,15 @@ void editar(Musica lista[], int total) {
 
             printf("Novo nome da música: ");
             fgets(lista[i].nome, TAM_NOME, stdin);
+            lista[i].nome[strcspn(lista[i].nome, "\n")] = 0;
 
             printf("Novo artista: ");
             fgets(lista[i].artista, TAM_ARTISTA, stdin);
+            lista[i].artista[strcspn(lista[i].artista, "\n")] = 0;
 
             printf("Novo género: ");
-            fgets(lista[i].genero, TAM_ARTISTA, stdin);
+            fgets(lista[i].genero, TAM_GENERO, stdin);
+            lista[i].genero[strcspn(lista[i].genero, "\n")] = 0;
 
             printf("Nova duração (em segundos): ");
             scanf("%d", &lista[i].duracao);
@@ -413,9 +516,9 @@ void tocar_musica(Musica lista[], int total){
             //Lista  todas as músicas
             for (int i = 0; i < total; i++) {
                         printf("ID: %d\n", lista[i].id);
-                        printf("Nome: %s", lista[i].nome);
-                        printf("Artista: %s", lista[i].artista);
-                        printf("Gênero: %s", lista[i].genero);
+                        printf("Nome: %s\n", lista[i].nome);
+                        printf("Artista: %s\n", lista[i].artista);
+                        printf("Gênero: %s\n", lista[i].genero);
                         printf("Duração: %d segundos\n", lista[i].duracao);
                         printf("-------------------------------------\n");
                     }
@@ -439,8 +542,8 @@ void tocar_musica(Musica lista[], int total){
                 for (int i = 0; i < total; i++) {
                     if (lista[i].id == id_tocar) {
                         printf("\nA tocar...\n");
-                        printf("Nome: %s", lista[i].nome);
-                        printf("Artista: %s", lista[i].artista);
+                        printf("Nome: %s\n", lista[i].nome);
+                        printf("Artista: %s\n", lista[i].artista);
                         printf("Duração: %d segundos\n\n", lista[i].duracao);
 
                         for (int j = 0; j < lista[i].duracao && j < 10; j++) {
