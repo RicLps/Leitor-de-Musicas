@@ -6,7 +6,7 @@
 void leitura(const char *nome){
 	FILE *arquivo = fopen(nome, "r");
 	if(arquivo == NULL){
-		printf("Não foi possível abrir o arquivo\n");
+		printf("Nao foi possivel abrir o arquivo\n");
 		return;
 	
 	}
@@ -23,7 +23,7 @@ void leitura(const char *nome){
 void escrever(const char *nome){
 	FILE *arquivo = fopen(nome, "w");
 	if(arquivo == NULL){
-		printf("Não foi possível abrir o arquivo");
+		printf("Não foi possivel abrir o arquivo");
 		return;
 }
 
