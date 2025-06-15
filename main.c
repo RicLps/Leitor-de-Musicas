@@ -28,7 +28,7 @@ int main() {
         printf("| 3. Gerenciar Albuns           |\n");
         printf("| 0. Sair                       |\n");
         printf("+===============================+\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         //Sistema de sub-menus para cada uma das opções acima
@@ -46,7 +46,7 @@ int main() {
                     printf("| 5. Estatisticas das musicas   |\n");
                     printf("| 0. Voltar                     |\n");
                     printf("+===============================+\n");
-                    printf("Escolha uma opção: ");
+                    printf("Escolha uma opcao: ");
                     scanf("%d", &subopcao);
 
                     //Opções que chamam as diferentes funções do sistema
@@ -89,7 +89,7 @@ int main() {
                     printf("| 6. Listar Albuns Criados         |\n");
                     printf("| 0. Voltar                        |\n");
                     printf("+==================================+\n");
-                    printf("Escolha uma opção: \n");
+                    printf("Escolha uma opcao: \n");
                     scanf("%d", &subopcao);
                     getchar();
                          //Switch case que apresenta as funções relacionadas a manipulação de albuns
@@ -118,7 +118,7 @@ int main() {
                 break;
             //Verifica se a opção inserida for inválida
             default:
-                printf("Opção inválida.\n");
+                printf("Opcao invalida.\n");
                 printf("Pressione Enter para continuar...");
                 getchar(); getchar();
                 break;
