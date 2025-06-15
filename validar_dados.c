@@ -10,7 +10,7 @@ int validarDados(const char *entrada){
 
 	//Verificar a qntd de caracteres
 	if(len < 3 || len > 50){
-		printf("Atenção: O nome deve ter entre 3 a 50 caracteres");
+		printf("Atencao: O nome deve ter entre 3 a 50 caracteres");
 		return 0;
 	}
 
@@ -19,14 +19,14 @@ int validarDados(const char *entrada){
 	     char c = entrada[i];
 	 
 	     if(!isalnum(c) && c != ' ' && c != '_' && c != '-' ){
-	     	printf("Atenção: Nome inválido, use soente letras, números, espaço, underscore e hífens.");
+	     	printf("Atencao: Nome invalido, use soente letras, numeros, espaco, underscore e hifens.");
 	     	return 0;
 	     }
 	}
 
  	//Não deixar texto em branco / vazio
 	if (strspn(entrada, " ") == len){
-	   printf("Atenção: Insira algum caracter válido");
+	   printf("Atencao: Insira algum caracter valido");
 		return 0;
 	}
 
