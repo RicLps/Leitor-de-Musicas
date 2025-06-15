@@ -143,7 +143,7 @@ void adicionar_musica_album(Album albuns[], int total_albuns, Musica lista_music
 
     printf("Musicas disponiveis:\n");
     for (int i = 0; i < total_musicas; i++) {
-        printf("Id: %d - Nome: %s\n", lista_musicas[i].id, lista_musicas[i].nome);
+        printf("Id: %d - %s\n", lista_musicas[i].id, lista_musicas[i].nome);
     }
 
     int id_musica;
@@ -354,33 +354,39 @@ void listar_albuns(Album albuns[], int total_albuns) {
 
 //Função que elimina uma música do arquivo de registro
 void eliminar(Musica lista_musicas[], int *total) {
-      int id = 0;
-      int musica_encontrada = 0;
-      
-      printf("Digite o ID da musica que deseja eliminar: \n");
-      scanf("%d", &id);
-      
-      for (int i = 0; i < *total; i++) { // Verifique todas as músicas do programa
-            if(lista_musicas[i].id == id) {
-                  musica_encontrada = 1; // mostra que a musica com o id que inserimos existe e foi encontrado e tambem serve como condição de paragem para que o prog não faça o if(musica_encontrada == 0){
+    int id = 0;
+    int musica_encontrada = 0;
+    
+    printf("Digite o ID da musica que deseja eliminar: \n");
+    scanf("%d", &id);
+    
+    for (int i = 0; i < *total; i++) { // Verifique todas as músicas do programa
+        if(lista_musicas[i].id == id) {
+            musica_encontrada = 1; // mostra que a musica com o id que inserimos existe e foi encontrado e tambem serve como condição de paragem para que o prog não faça o if(musica_encontrada == 0){
             
-                 
-                  for (int j = i; j < *total - 1; j++) { 
-                        lista_musicas[j] = lista_musicas[j + 1]; // após a musica ser removida, desloca o musica a seguir da música removida para o id da musica removida
-                  }
-            
-                  (*total)--; // para descer o número de musicas da lista de musicas
-                  printf("Música com id %d foi removida com sucesso \n", id); // msg que a musica que o utilizador queira remover foi removido
-                  break;
+            // após a musica ser removida, desloca a música a seguir da música removida para o id da musica removida
+            for (int j = i; j < *total - 1; j++) { 
+                lista_musicas[j] = lista_musicas[j + 1]; 
             }
-      }
-      
-      if(musica_encontrada == 0){ // caso a musica não for encontrada, ou seja, quando musica_encontrada for igual a zero, mostra msg que a musica que o utilizador quer remover não existe
-            printf("A música com id %d não foi encontrada na lista de músicas.", id);
-      }   
 
-//Cria um arquivo temporário e adiciona todas as músicas, menos a que foi escolhida pelo utilizador para ser eliminada
-FILE *f_temp = fopen("temp.txt", "w");
+            (*total)--; // para descer o número de musicas da lista de musicas
+            printf("Música com id %d foi removida com sucesso \n", id); // msg que a musica que o utilizador queira remover foi removido
+            break;
+        }
+    }
+    
+    if(musica_encontrada == 0){ // caso a musica não for encontrada, ou seja, quando musica_encontrada for igual a zero, mostra msg que a musica que o utilizador quer remover não existe
+        printf("A música com id %d não foi encontrada na lista de músicas.", id);
+        return;
+    }
+
+    // Atualiza os IDs de todas as músicas para garantir que ficam sequenciais (1, 2, 3...)
+    for (int i = 0; i < *total; i++) {
+        lista_musicas[i].id = i + 1; // define um novo id para cada música com base na sua posição
+    }
+
+    //Cria um arquivo temporário e adiciona todas as músicas, com os novos IDs reorganizados
+    FILE *f_temp = fopen("temp.txt", "w");
     if (f_temp == NULL) {
         printf("Erro ao criar arquivo temporário (temp.txt). \n");
         return;
@@ -388,17 +394,59 @@ FILE *f_temp = fopen("temp.txt", "w");
 
     for (int i = 0; i < *total; i++) {
         fprintf(f_temp, "Id da música: %d\n", lista_musicas[i].id);
-        fprintf(f_temp, "Nome: %s", lista_musicas[i].nome);
-        fprintf(f_temp, "Artista: %s", lista_musicas[i].artista);
-        fprintf(f_temp, "Gênero: %s", lista_musicas[i].genero);
+        fprintf(f_temp, "Nome: %s\n", lista_musicas[i].nome);
+        fprintf(f_temp, "Artista: %s\n", lista_musicas[i].artista);
+        fprintf(f_temp, "Gênero: %s\n", lista_musicas[i].genero);
         fprintf(f_temp, "Duração: %ds\n", lista_musicas[i].duracao);
         fprintf(f_temp, "------------------------------------------------------ \n");
     }
+
     fclose(f_temp);
 
     //Remove o arquivo antigo desatualizado e renomeia o arquivo temporário para o nome antigo
     remove("arquivo_musicas.txt");
     rename("temp.txt", "arquivo_musicas.txt");
+}
+
+
+
+void carregar_musicas(Musica lista[], int *total) {
+    FILE *f = fopen("arquivo_musicas.txt", "r");
+    if (f == NULL) {
+        printf("Arquivo de músicas não encontrado.\n");
+        return;
+    }
+
+    char linha[256];
+    Musica m;
+
+    while (fgets(linha, sizeof(linha), f) != NULL) {
+        if (sscanf(linha, "Id da música: %d", &m.id) != 1)
+            continue;
+
+        if (fgets(m.nome, TAM_NOME, f) == NULL) break;
+        m.nome[strcspn(m.nome, "\n")] = 0;
+
+        if (fgets(m.artista, TAM_ARTISTA, f) == NULL) break;
+        m.artista[strcspn(m.artista, "\n")] = 0;
+
+        if (fgets(m.genero, TAM_GENERO, f) == NULL) break;
+        m.genero[strcspn(m.genero, "\n")] = 0;
+
+        if (fgets(linha, sizeof(linha), f) == NULL) break;
+        sscanf(linha, "Duração: %ds", &m.duracao);
+
+        fgets(linha, sizeof(linha), f);
+
+        lista[*total] = m;
+        (*total)++;
+
+        if (*total >= MAX_MUSICAS)
+            break;
+    }
+
+    fclose(f);
+    printf("%d músicas carregadas do arquivo.\n", *total);
 }
 
 

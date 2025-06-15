@@ -37,4 +37,5 @@ void listar_musicas_album(Album albuns[], int total_albuns, Musica lista_musicas
 void remover_musica_album(Album albuns[], int total_albuns, Musica lista_musicas[], int total_musicas);
 void apagar_album(Album albuns[], int *total_albuns);
 void listar_albuns(Album albuns[], int total_albuns);
+void carregar_musicas(Musica lista[], int *total);
 int validarDados(const char *entrada);

@@ -15,6 +15,8 @@ int main() {
     int total = 0;
     int opcao, subopcao;
 
+    carregar_musicas(lista, &total);
+
     //Menu principal
     do {
         system("cls");
