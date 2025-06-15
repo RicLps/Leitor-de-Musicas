@@ -589,6 +589,8 @@ void tocar_musica(Musica lista[], int total){
                 //Simulação de tocar música
                 for (int i = 0; i < total; i++) {
                     if (lista[i].id == id_tocar) {
+                        lista[i].vezes_ouvida++;
+                        salvar_estatisticas(lista, total);
                         printf("\nA tocar...\n");
                         printf("Nome: %s\n", lista[i].nome);
                         printf("Artista: %s\n", lista[i].artista);
@@ -626,3 +628,69 @@ void tocar_musica(Musica lista[], int total){
 
     } while (opcao != 0);
 }
+
+// Função que salva as estatísticas das músicas em um arquivo
+void salvar_estatisticas(Musica lista[], int total) {
+    if (total == 0) return;
+
+    FILE *f = fopen("arquivo_estatisticas.txt", "w");
+    if (f == NULL) {
+        printf("Erro ao criar/abrir o arquivo de estatísticas.\n");
+        return;
+    }
+
+    int total_musicas = total;
+    int tempo_total_ouvido = 0;
+    int mais_ouvida_index = 0;
+    int artistas_unicos = 0;
+    char artistas[MAX_MUSICAS][TAM_ARTISTA];
+
+    for (int i = 0; i < total; i++) {
+        tempo_total_ouvido += lista[i].duracao * lista[i].vezes_ouvida;
+
+        if (lista[i].vezes_ouvida > lista[mais_ouvida_index].vezes_ouvida) {
+            mais_ouvida_index = i;
+        }
+
+        int encontrado = 0;
+        for (int j = 0; j < artistas_unicos; j++) {
+            if (strcmp(artistas[j], lista[i].artista) == 0) {
+                encontrado = 1;
+                break;
+            }
+        }
+        if (!encontrado) {
+            strcpy(artistas[artistas_unicos++], lista[i].artista);
+        }
+    }
+    // Escreve as estatísticas no arquivo
+    fprintf(f, "Total de musicas: %d\n", total_musicas);
+    fprintf(f, "Musica mais ouvida: %s (%d vezes)\n", lista[mais_ouvida_index].nome, lista[mais_ouvida_index].vezes_ouvida);
+    fprintf(f, "Tempo total ouvindo musicas: %d segundos\n", tempo_total_ouvido);
+    fprintf(f, "Numero de artistas diferentes: %d\n", artistas_unicos);
+
+    fclose(f);
+}
+
+void mostrar_estatisticas() {
+    FILE *f = fopen("arquivo_estatisticas.txt", "r");
+    if (f == NULL) {
+        printf("Nenhuma estatística disponível ainda. Toque músicas para gerar estatísticas.\n");
+        return;
+    }
+
+    char linha[256];
+
+    printf("\n===== Estatisticas Salvas =====\n");
+
+    while (fgets(linha, sizeof(linha), f)) {
+        printf("%s", linha);
+    }
+
+    fclose(f);
+
+    printf("\nPressione Enter para continuar...");
+    getchar();
+}
+
+

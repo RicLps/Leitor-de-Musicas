@@ -43,6 +43,7 @@ int main() {
                     printf("| 2. Listar musicas             |\n");
                     printf("| 3. Eliminar musica            |\n");
                     printf("| 4. Editar musica              |\n");
+                    printf("| 5. Estatisticas das musicas   |\n");
                     printf("| 0. Voltar                     |\n");
                     printf("+===============================+\n");
                     printf("Escolha uma opção: ");
@@ -54,6 +55,7 @@ int main() {
                         case 2: listar(lista, total); break;
                         case 3: eliminar(lista, &total); break; 
                         case 4: editar(lista, total); break;
+                        case 5: mostrar_estatisticas(lista, total); break;
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }

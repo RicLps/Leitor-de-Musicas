@@ -16,6 +16,7 @@ typedef struct {
     char artista[TAM_ARTISTA];
     char genero[TAM_GENERO];
     int duracao;
+    int vezes_ouvida;
 } Musica;
 
 //Struct que armazena os dados referentes a albuns
@@ -39,3 +40,5 @@ void apagar_album(Album albuns[], int *total_albuns);
 void listar_albuns(Album albuns[], int total_albuns);
 void carregar_musicas(Musica lista[], int *total);
 int validarDados(const char *entrada);
+void mostrar_estatisticas();
+void salvar_estatisticas(Musica lista[], int total);
