@@ -25,17 +25,45 @@ musica_nova.id = *total + 1;  // adiciona o id da musica na lista de musicas (to
 
 getchar();
 //Pede os dados da música ao utilizador
-printf("Insira o nome da musica: ");
-fgets(musica_nova.nome, TAM_NOME, stdin);
-musica_nova.nome[strcspn(musica_nova.nome, "\n")] = 0;
 
-printf("Insira o nome do artista da musica: ");
-fgets(musica_nova.artista, TAM_ARTISTA, stdin);
-musica_nova.artista[strcspn(musica_nova.artista, "\n")] = 0;
+do{
+    printf("Insira o nome da musica: ");
+    fgets(musica_nova.nome, TAM_NOME, stdin);
+    musica_nova.nome[strcspn(musica_nova.nome, "\n")] = 0;
 
-printf("Insira o genero musical da musica: ");
-fgets(musica_nova.genero, TAM_GENERO, stdin);
-musica_nova.genero[strcspn(musica_nova.genero, "\n")] = 0;
+    verificar_entrada = validarDados(musica_nova.nome);
+    
+    if(verificar_entrada == 1){
+        printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+        getchar();
+    } 
+}while(verificar_entrada == 1);
+
+do{
+    printf("Insira o nome do artista: ");
+    fgets(musica_nova.artista, TAM_ARTISTA, stdin);
+    musica_nova.artista[strcspn(musica_nova.artista, "\n")] = 0;
+
+    verificar_entrada = validarDados(musica_nova.artista);
+    
+    if(verificar_entrada == 1){
+        printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+        getchar();
+    } 
+}while(verificar_entrada == 1);
+
+do{
+    printf("Insira o Genero da musica: ");
+    fgets(musica_nova.genero, TAM_GENERO, stdin);
+    musica_nova.genero[strcspn(musica_nova.genero, "\n")] = 0;
+
+    verificar_entrada = validarDados(musica_nova.genero);
+    
+    if(verificar_entrada == 1){
+        printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+        getchar();
+    } 
+}while(verificar_entrada == 1);
 
 printf("Insira a duracao da musica (em segundos): ");
 scanf("%d", &musica_nova.duracao);
@@ -98,11 +126,20 @@ if (*total_albuns >= MAX_ALBUNS) {
  Album novo_album;
  novo_album.total_musicas = 0; // define o total_musicas = 0, já que não adicionamos músicas ainda.
 
-printf("Insira o nome do album a se criar (maximo 20 caracteres): ");
+do{
+    printf("Insira o nome do album a se criar (maximo 50 caracteres): ");
     fgets(novo_album.nome, NOME_ALBUM, stdin);
 
-    albuns[*total_albuns] = novo_album; // vai adicionar um o álbum que criei na próxima posição livre do array albums.
-    (*total_albuns)++; // aumenta o valor do *total_albuns para mostrar que um album foi criado dentor do *total_albuns
+    verificar_entrada = validarDados(novo_album.nome);
+
+    if(verificar_entrada == 1){
+        printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+        getchar();
+    }
+}while(verificar_entrada == 1);
+
+albuns[*total_albuns] = novo_album; // vai adicionar um o álbum que criei na próxima posição livre do array albums.
+(*total_albuns)++; // aumenta o valor do *total_albuns para mostrar que um album foi criado dentor do *total_albuns
 
 printf("\nAlbum '%s' foi criado com sucesso.\nLembre-se que um album aceita somente 100 musicas! \n", novo_album.nome);
 }
@@ -351,7 +388,6 @@ void listar_albuns(Album albuns[], int total_albuns) {
 }
 
 
-
 //Função que elimina uma música do arquivo de registro
 void eliminar(Musica lista_musicas[], int *total) {
     int id = 0;
@@ -462,17 +498,41 @@ void editar(Musica lista[], int total) {
         if (lista[i].id == id) {
             encontrada = 1;
 
-            printf("Novo nome da musica: ");
-            fgets(lista[i].nome, TAM_NOME, stdin);
-            lista[i].nome[strcspn(lista[i].nome, "\n")] = 0;
+            do{
+                printf("Novo nome da musica: ");
+                fgets(lista[i].nome, TAM_NOME, stdin);
+                lista[i].nome[strcspn(lista[i].nome, "\n")] = 0;
 
-            printf("Novo artista: ");
-            fgets(lista[i].artista, TAM_ARTISTA, stdin);
-            lista[i].artista[strcspn(lista[i].artista, "\n")] = 0;
+                verificar_entrada = validarDados(lista[i].nome);
 
-            printf("Novo genero: ");
-            fgets(lista[i].genero, TAM_GENERO, stdin);
-            lista[i].genero[strcspn(lista[i].genero, "\n")] = 0;
+                if(verificar_entrada == 1){
+                    printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+                }
+            }while(verificar_entrada == 1);
+            
+            do{
+                printf("Novo nome do artista: ");
+                fgets(lista[i].nome, TAM_ARTISTA, stdin);
+                lista[i].artista[strcspn(lista[i].artista, "\n")] = 0;
+
+                verificar_entrada = validarDados(lista[i].artista);
+
+                if(verificar_entrada == 1){
+                    printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+                }
+            }while(verificar_entrada == 1);
+
+            do{
+                printf("Novo genero: ");
+                fgets(lista[i].genero, TAM_NOME, stdin);
+                lista[i].genero[strcspn(lista[i].genero, "\n")] = 0;
+
+                verificar_entrada = validarDados(lista[i].genero);
+
+                if(verificar_entrada == 1){
+                    printf("Entrada invalida!\n\nPressione Enter para continuar...\n");
+                }
+            }while(verificar_entrada == 1);
 
             printf("Nova duracao (em segundos): ");
             scanf("%d", &lista[i].duracao);
