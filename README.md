@@ -16,3 +16,15 @@ Programa em C que simula um leitor de música, em que o utilizador possa adicion
 ### Reprodução
 - Listar músicas disponíveis
 - Tocar música por ID (simulação)
+
+## Estrutura de Arquivos
+LEITOR-DE-MUSICAS
+├── arquivo_estatisticas.txt        # Armazena dados estatísticos
+├── arquivo_musicas.txt             # Armazena todas as músicas registradas
+├── funcoes_auxiliares.c            # Funções de apoio
+├── funcoes_auxiliares.h            # Cabeçalho das funções auxiliares
+├── leitura-escrita.c               # Operações de leitura e gravação em ficheiros
+├── main.c                          # Ponto de entrada do programa (menu principal)
+├── validar_dados.c                 # Validações de entrada do utilizador 
+├── programa.exe                    # Executável gerado após compilação 
+├── README.md                       # Ficheiro de documentação 
