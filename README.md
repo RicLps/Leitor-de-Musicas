@@ -5,11 +5,11 @@ Programa em C que simula um leitor de música, em que o utilizador possa adicion
 ### Músicas 
 - Adicionar, editar e eliminar músicas
 - Listar músicas registradas
-- Estatísticas de músicas (quantidade total, mais tocadas, etc.)
+- Estatísticas de músicas
 
 ### Álbuns
 - Criar e apagar álbuns
-- Adicionar/remover músicas em álbuns
+- Adicionar/remover músicas dos álbuns
 - Listar músicas de um álbum
 - Listar todos os álbuns criados
 
