@@ -45,4 +45,4 @@ LEITOR-DE-MUSICAS
    - `Terminal > Novo Terminal`
   
 3. **Compilar o projeto**
-No terminal, execute: 'gcc main.c funcoes_auxiliares.c leitura-escrita.c validar_dados.c -o programa.exe'
+  - No terminal, execute: `gcc main.c funcoes_auxiliares.c leitura-escrita.c validar_dados.c -o programa.exe`
