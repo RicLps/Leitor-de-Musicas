@@ -42,7 +42,7 @@ LEITOR-DE-MUSICAS
    - `Ficheiro > Abrir Pasta` → Selecionar a pasta do projeto
 
 2. **Abrir o terminal integrado**
-   - cntrl+shift+ç ou `Terminal > Novo Terminal`
+   - `cntrl+shift+ç` ou `Terminal > Novo Terminal`
   
 3. **Compilar o programa**
   - No terminal para compilar o comando, execute: `gcc main.c funcoes_auxiliares.c leitura-escrita.c validar_dados.c -o programa.exe`
