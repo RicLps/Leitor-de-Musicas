@@ -9,6 +9,7 @@
  
 extern int total;
 int verificar_entrada = 0;
+
 //Struct que armazena os diferentes dados das músicas
 typedef struct {
     int id;
