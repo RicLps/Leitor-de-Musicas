@@ -49,3 +49,9 @@ LEITOR-DE-MUSICAS
 
 4. **Executar o programa**
   - No mesmo terminal, execute: `.\programa.exe`
+
+## Créditos
+Projeto desenvolvido por: Ricardo Santos, Ricardo Lopes, Raíssa Monteiro e Massimiliano Monteiro
+Modulo: Programação
+Escola: Escola Industrial e Comercial do Mindelo GDC
+Ano letivo: 2024/2025
