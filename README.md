@@ -36,4 +36,10 @@ LEITOR-DE-MUSICAS
 - Compilador GCC (MinGW no Windows ou GCC no Linux/macOS)
 - Extensão C/C++ da Microsoft (ou Code Runner)
 
-  
+  ### Passos:
+
+1. **Abrir o projeto no VS Code**
+   - `Ficheiro > Abrir Pasta` → Selecionar a pasta do projeto
+
+2. **Abrir o terminal integrado**
+   - `Terminal > Novo Terminal`
