@@ -32,7 +32,7 @@ LEITOR-DE-MUSICAS
 ## Como Executar no Visual Studio Code
 
 ### Pré-requisitos
-- Visual Studio Code instalado no seu sistema;
+- Visual Studio Code instalado no seu sistema
 - Compilador GCC (MinGW no Windows ou GCC no Linux/macOS)
 - Extensão C/C++ da Microsoft (ou Code Runner)
 
