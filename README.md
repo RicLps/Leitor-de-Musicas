@@ -34,7 +34,7 @@ LEITOR-DE-MUSICAS
 ### Pré-requisitos
 - Visual Studio Code instalado no seu sistema
 - Compilador GCC (MinGW no Windows ou GCC no Linux/macOS)
-- Extensão C/C++ da Microsoft (ou Code Runner)
+- Extensão C/C++ da Microsoft (ou Code Runner) - pode ser baixado dentro do Vs Code
 
   ### Passos:
 
