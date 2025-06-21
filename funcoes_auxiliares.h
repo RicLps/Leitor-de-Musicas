@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAX_MUSICAS 100
 #define TAM_NOME 50
-#define TAM_ARTISTA 100
+#define TAM_ARTISTA 50
 #define TAM_GENERO 50
 #define MAX_ALBUNS 15
 #define NOME_ALBUM 50
