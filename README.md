@@ -1,5 +1,5 @@
 # Leitor-de-Musicas
-Programa em C que simula um leitor de música, em que o utilizador possa adicionar, listar, editar e eliminar os itens (músicas) armazenados e, por fim, simular o ato de tocar a música selecionada pelo utilizador
+Este programa, desenvolvido em linguagem C, simula um leitor de músicas em ambiente de linha de comandos, permitindo ao utilizador gerir uma biblioteca de músicas (adicionar, listar, editar, eliminar) e simular a reprodução das musicas armazenadas.
 
 ## Funcionalidades
 ### Músicas 
