@@ -28,3 +28,12 @@ LEITOR-DE-MUSICAS
 - ├── validar_dados.c                 
 - ├── programa.exe                    
 - ├── README.md                       
+
+## Como Executar no Visual Studio Code
+
+### Pré-requisitos
+- Visual Studio Code instalado
+- Compilador GCC (MinGW no Windows ou GCC no Linux/macOS)
+- Extensão C/C++ da Microsoft (ou Code Runner)
+
+  
