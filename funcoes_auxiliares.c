@@ -449,33 +449,6 @@ void carregar_musicas(Musica lista[], int *total) {
     printf("%d musicas carregadas do arquivo.\n", *total);
 }
 
-
-
-
-/*void tocar_musica(Musica lista[], int total) {
-    if (total == 0) {
-        printf("Nenhuma música disponível para tocar.\n");
-        return;
-    }
-
-    int id_tocar;
-    printf("Digite o ID da música que deseja tocar: ");
-    scanf("%d", &id_tocar);
-
-    for (int i = 0; i < total; i++) {
-        if (lista[i].id == id_tocar) {
-            printf("\n A tocar...\n");
-            printf("Nome: %s", lista[i].nome);
-            printf("Artista: %s", lista[i].artista);
-            printf("Duração: %d segundos\n", lista[i].duracao);
-            return;
-        }
-    }
-
-    printf("Música com ID %d não encontrada.\n", id_tocar);
-}
-*/
-
 //Função que edita as informações da música escolhida pelo utilizador
 void editar(Musica lista[], int total) {
     int id, encontrada = 0;
@@ -545,7 +518,7 @@ void tocar_musica(Musica lista[], int total){
     do {
         system("cls");
         printf("\n+===============================+\n");
-        printf("|           Tocar Música        |\n");
+        printf("|           Tocar Musica        |\n");
         printf("+===============================+\n");
         printf("| 1. Listar musicas             |\n");
         printf("| 2. Tocar musica por ID        |\n");
