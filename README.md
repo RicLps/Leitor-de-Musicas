@@ -12,7 +12,7 @@ Programa desenvolvido em C que simula um leitor de músicas, permitindo ao utili
 - Listar músicas de um álbum
 - Listar todos os álbuns criados
 
-### Reprodução
+### Reprodução de Musicas
 - Listar músicas disponíveis
 - Tocar música por ID (simulação)
 
