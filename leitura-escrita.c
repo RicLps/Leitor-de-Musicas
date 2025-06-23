@@ -10,7 +10,7 @@ void leitura(const char *nome) {
 
     char conteudo[200];
     printf("%s:\n", nome);
-    while (fgets(conteudo, sizeof(conteudo), arquivo)) {
+    while (fgets(conteudo, sizeof(conteudo), arquivo) {
         printf("%s", conteudo);
     }
     fclose(arquivo);
@@ -23,6 +23,8 @@ void escrever(const char *nome, const char *conteudo) {
         return;
     }
 
-    fprintf(arquivo, "%s", conteudo);
+    if (fprintf(arquivo, "%s", conteudo) < 0) {
+        printf("Erro ao escrever no arquivo");
+    }
     fclose(arquivo);
 }
