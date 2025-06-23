@@ -23,8 +23,6 @@ void escrever(const char *nome, const char *conteudo) {
         return;
     }
 
-    if (fprintf(arquivo, "%s", conteudo) < 0) {
-        printf("Erro ao escrever no arquivo");
-    }
+    fprintf(arquivo, "%s", conteudo);
     fclose(arquivo);
 }
