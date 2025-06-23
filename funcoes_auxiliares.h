@@ -7,7 +7,6 @@
 #define NOME_ALBUM 50
 #define MAX_MUSICAS_ALBUM 100
 
-//Struct que armazena os diferentes dados das músicas
 typedef struct {
     int id;
     char nome[TAM_NOME];
@@ -17,14 +16,12 @@ typedef struct {
     int vezes_ouvida;
 } Musica;
 
-//Struct que armazena os dados referentes a albuns
 typedef struct {
     char nome[NOME_ALBUM];
     int id_musica[MAX_MUSICAS_ALBUM];
     int total_musicas;
 } Album;
 
-//Declaração de todas as funções usadas no programa
 void adicionar(Musica lista[], int *total);
 void listar(Musica lista[], int total);
 void eliminar(Musica lista[], int *total);
