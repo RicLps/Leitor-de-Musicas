@@ -6,10 +6,10 @@ int main() {
     Musica lista[MAX_MUSICAS];
     Album albuns[MAX_ALBUNS]; 
     int total_albuns = 0; 
-    int total = 0;
+    int total_musicas = 0;
     int opcao, subopcao;
 
-    carregar_musicas(lista, &total);
+    carregar_musicas(lista, &total_musicas);
 
     do {
         system("cls");
@@ -23,6 +23,7 @@ int main() {
         printf("+===============================+\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
+        while(getchar() != '\n');
 
         switch (opcao) {
             case 1:
@@ -40,30 +41,27 @@ int main() {
                     printf("+===============================+\n");
                     printf("Escolha uma opcao: ");
                     scanf("%d", &subopcao);
+                    while(getchar() != '\n');
 
                     switch (subopcao) {
-                        case 1: adicionar(lista, &total); break;    
-                        case 2: listar(lista, total); break;
-                        case 3: eliminar(lista, &total); break; 
-                        case 4: editar(lista, total); break;
-                        case 5: mostrar_estatisticas(lista, total); break;
+                        case 1: adicionar(lista, &total_musicas); break;    
+                        case 2: listar(lista, total_musicas); break;
+                        case 3: eliminar(lista, &total_musicas); break; 
+                        case 4: editar(lista, total_musicas); break;
+                        case 5: mostrar_estatisticas(lista, total_musicas); break;
                         case 0: break;
                         default: printf("Opção inválida.\n"); break;
                     }
 
                     if (subopcao != 0) {
                         printf("\nPressione Enter para continuar...");
-                        getchar(); getchar();
+                        while(getchar() != '\n');
                     }
-
                 } while (subopcao != 0);
                 break;
 
             case 2:
-                system("cls");
-                tocar_musica(lista, total);
-                printf("\nPressione Enter para continuar...");
-                getchar(); getchar();
+                tocar_musica(lista, total_musicas);
                 break;
 
             case 3:
@@ -82,13 +80,13 @@ int main() {
                     printf("+==================================+\n");
                     printf("Escolha uma opcao: ");
                     scanf("%d", &subopcao);
-                    getchar();
+                    while(getchar() != '\n');
 
                     switch (subopcao) {
                         case 1: criar_album(albuns, &total_albuns); break;
-                        case 2: adicionar_musica_album(albuns, total_albuns, lista, total); break;
-                        case 3: listar_musicas_album(albuns, total_albuns, lista, total); break;
-                        case 4: remover_musica_album(albuns, total_albuns, lista, total); break;
+                        case 2: adicionar_musica_album(albuns, total_albuns, lista, total_musicas); break;
+                        case 3: listar_musicas_album(albuns, total_albuns, lista, total_musicas); break;
+                        case 4: remover_musica_album(albuns, total_albuns, lista, total_musicas); break;
                         case 5: apagar_album(albuns, &total_albuns); break;
                         case 6: listar_albuns(albuns, total_albuns); break;
                         case 0: break;
@@ -97,9 +95,8 @@ int main() {
 
                     if (subopcao != 0) {
                         printf("\nPressione Enter para continuar...");
-                        getchar();
+                        while(getchar() != '\n');
                     }
-
                 } while (subopcao != 0);
                 break;
 
@@ -108,12 +105,11 @@ int main() {
                 break;
 
             default:
-                printf("Opcao invalida.\n");
+                printf("Opção inválida.\n");
                 printf("Pressione Enter para continuar...");
-                getchar(); getchar();
+                while(getchar() != '\n');
                 break;
         }
-
     } while (opcao != 0);
 
     return 0;
