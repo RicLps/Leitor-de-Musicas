@@ -1,14 +1,11 @@
 #include <stdio.h>
 #define MAX_MUSICAS 100
 #define TAM_NOME 50
-#define TAM_ARTISTA 50
+#define TAM_ARTISTA 100
 #define TAM_GENERO 50
 #define MAX_ALBUNS 15
 #define NOME_ALBUM 50
 #define MAX_MUSICAS_ALBUM 100
- 
-extern int total;
-int verificar_entrada = 0;
 
 //Struct que armazena os diferentes dados das músicas
 typedef struct {
@@ -41,5 +38,5 @@ void apagar_album(Album albuns[], int *total_albuns);
 void listar_albuns(Album albuns[], int total_albuns);
 void carregar_musicas(Musica lista[], int *total);
 int validarDados(const char *entrada);
-void mostrar_estatisticas();
+void mostrar_estatisticas(Musica lista[], int total);
 void salvar_estatisticas(Musica lista[], int total);
