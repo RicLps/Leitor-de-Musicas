@@ -1,16 +1,17 @@
+#include "funcoes_auxiliares.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 void leitura(const char *nome) {
     FILE *arquivo = fopen(nome, "r");
-    if(arquivo == NULL) {
-        printf("Nao foi possivel abrir o arquivo\n");
+    if (arquivo == NULL) {
+        printf("Não foi possível abrir o arquivo %s\n", nome);
         return;
     }
 
-    char conteudo[200];
-    printf("%s:\n", nome);
-    while (fgets(conteudo, sizeof(conteudo), arquivo) {
+    char conteudo[256];
+    printf("\nConteúdo do arquivo %s:\n", nome);
+    while (fgets(conteudo, sizeof(conteudo), arquivo) != NULL) {
         printf("%s", conteudo);
     }
     fclose(arquivo);
@@ -18,11 +19,13 @@ void leitura(const char *nome) {
 
 void escrever(const char *nome, const char *conteudo) {
     FILE *arquivo = fopen(nome, "w");
-    if(arquivo == NULL) {
-        printf("Nao foi possivel abrir o arquivo");
+    if (arquivo == NULL) {
+        printf("Não foi possível criar o arquivo %s\n", nome);
         return;
     }
 
-    fprintf(arquivo, "%s", conteudo);
+    if (fprintf(arquivo, "%s", conteudo) < 0) {
+        printf("Erro ao escrever no arquivo\n");
+    }
     fclose(arquivo);
 }
