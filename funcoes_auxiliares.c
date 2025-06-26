@@ -1,6 +1,7 @@
 #include "funcoes_auxiliares.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #ifdef _WIN32
     #include <windows.h>
@@ -11,11 +12,19 @@
 #endif
 
 void salvar_estatisticas(Musica lista[], int total) {
-    if (total == 0 || lista == NULL) return;
+    if (lista == NULL) {
+        printf("Lista de músicas inválida.\n");
+        return;
+    }
+
+    if (total == 0) {
+        printf("Nenhuma música cadastrada para gerar estatísticas.\n");
+        return;
+    }
 
     FILE *f = fopen("arquivo_estatisticas.txt", "w");
     if (f == NULL) {
-        printf("Erro ao criar arquivo de estatisticas.\n");
+        printf("Erro ao criar arquivo de estatísticas.\n");
         return;
     }
 
@@ -23,11 +32,6 @@ void salvar_estatisticas(Musica lista[], int total) {
     int mais_ouvida_index = 0;
     int artistas_unicos = 0;
     char artistas[MAX_MUSICAS][TAM_ARTISTA];
-
-    // Inicializa array de artistas
-    for (int i = 0; i < MAX_MUSICAS; i++) {
-        artistas[i][0] = '\0';
-    }
 
     for (int i = 0; i < total; i++) {
         // Calcula tempo total ouvido
@@ -48,7 +52,7 @@ void salvar_estatisticas(Musica lista[], int total) {
                 break;
             }
         }
-        if (artista_novo && artistas_unicos < MAX_MUSICAS) {
+        if (artista_novo) {
             strncpy(artistas[artistas_unicos], lista[i].artista, TAM_ARTISTA-1);
             artistas[artistas_unicos][TAM_ARTISTA-1] = '\0';
             artistas_unicos++;
@@ -76,7 +80,7 @@ void mostrar_estatisticas(Musica lista[], int total) {
 
     char linha[256];
     printf("\n===== Estatisticas =====\n");
-    while (fgets(linha, sizeof(linha), f)) {
+    while (fgets(linha, sizeof(linha), f) {
         printf("%s", linha);
     }
     printf("=======================\n");
@@ -84,7 +88,14 @@ void mostrar_estatisticas(Musica lista[], int total) {
     fclose(f);
 }
 
-void tocar_musica(Musica lista[], int total){
+void tocar_musica(Musica lista[], int total) {
+    if (lista == NULL) {
+        printf("Lista de músicas inválida.\n");
+        printf("\nPressione Enter para continuar...");
+        while(getchar() != '\n');
+        return;
+    }
+
     int opcao;
 
     do {
@@ -97,8 +108,12 @@ void tocar_musica(Musica lista[], int total){
         printf("| 0. Voltar                     |\n");
         printf("+===============================+\n\n");
         printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
-        getchar();
+        if (scanf("%d", &opcao) != 1) {
+            while(getchar() != '\n');
+            printf("Entrada inválida.\n");
+            continue;
+        }
+        while(getchar() != '\n');
 
         switch (opcao) {
             case 1:
@@ -125,8 +140,12 @@ void tocar_musica(Musica lista[], int total){
 
                 int id_tocar;
                 printf("Digite o ID da musica que deseja tocar: ");
-                scanf("%d", &id_tocar);
-                getchar();
+                if (scanf("%d", &id_tocar) != 1) {
+                    printf("ID inválido.\n");
+                    while(getchar() != '\n');
+                    break;
+                }
+                while(getchar() != '\n');
 
                 int encontrada = 0;
 
@@ -139,7 +158,8 @@ void tocar_musica(Musica lista[], int total){
                         printf("Artista: %s\n", lista[i].artista);
                         printf("Duracao: %d segundos\n\n", lista[i].duracao);
 
-                        for (int j = 0; j < lista[i].duracao && j < 10; j++) {
+                        // Animação de tocar música por toda a duração
+                        for (int j = 0; j < lista[i].duracao; j++) {
                             if (j % 2 == 0) printf("\r/");
                             else printf("\r\\");
                             fflush(stdout);
@@ -166,7 +186,7 @@ void tocar_musica(Musica lista[], int total){
 
         if (opcao != 0) {
             printf("\nPressione Enter para continuar...");
-            getchar();
+            while(getchar() != '\n');
         }
 
     } while (opcao != 0);
