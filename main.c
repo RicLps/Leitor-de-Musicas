@@ -3,13 +3,19 @@
 #include <stdlib.h>
 
 int main() {
-    Musica lista[MAX_MUSICAS];
-    Album albuns[MAX_ALBUNS]; 
-    int total_albuns = 0; 
+    Musica lista[MAX_MUSICAS] = {0};
+    Album albuns[MAX_ALBUNS] = {0};
+    int total_albuns = 0;
     int total_musicas = 0;
     int opcao, subopcao;
 
+    // Carrega músicas verificando erro
+    printf("Carregando músicas...\n");
     carregar_musicas(lista, &total_musicas);
+    if (total_musicas < 0) {
+        printf("Erro ao carregar músicas. Continuando com lista vazia.\n");
+        total_musicas = 0;
+    }
 
     do {
         system("cls");
@@ -22,7 +28,12 @@ int main() {
         printf("| 0. Sair                       |\n");
         printf("+===============================+\n");
         printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+        
+        if (scanf("%d", &opcao) != 1) {
+            printf("Entrada inválida. Tente novamente.\n");
+            while(getchar() != '\n');
+            continue;
+        }
         while(getchar() != '\n');
 
         switch (opcao) {
@@ -40,7 +51,12 @@ int main() {
                     printf("| 0. Voltar                     |\n");
                     printf("+===============================+\n");
                     printf("Escolha uma opcao: ");
-                    scanf("%d", &subopcao);
+                    
+                    if (scanf("%d", &subopcao) != 1) {
+                        printf("Entrada inválida.\n");
+                        while(getchar() != '\n');
+                        continue;
+                    }
                     while(getchar() != '\n');
 
                     switch (subopcao) {
@@ -79,7 +95,12 @@ int main() {
                     printf("| 0. Voltar                        |\n");
                     printf("+==================================+\n");
                     printf("Escolha uma opcao: ");
-                    scanf("%d", &subopcao);
+                    
+                    if (scanf("%d", &subopcao) != 1) {
+                        printf("Entrada inválida.\n");
+                        while(getchar() != '\n');
+                        continue;
+                    }
                     while(getchar() != '\n');
 
                     switch (subopcao) {
