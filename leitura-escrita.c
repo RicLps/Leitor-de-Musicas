@@ -3,6 +3,11 @@
 #include <stdlib.h>
 
 void leitura(const char *nome) {
+    if (nome == NULL) {
+        printf("Nome de arquivo inválido.\n");
+        return;
+    }
+
     FILE *arquivo = fopen(nome, "r");
     if (arquivo == NULL) {
         printf("Não foi possível abrir o arquivo %s\n", nome);
@@ -18,6 +23,11 @@ void leitura(const char *nome) {
 }
 
 void escrever(const char *nome, const char *conteudo) {
+    if (nome == NULL || conteudo == NULL) {
+        printf("Parâmetros inválidos.\n");
+        return;
+    }
+
     FILE *arquivo = fopen(nome, "w");
     if (arquivo == NULL) {
         printf("Não foi possível criar o arquivo %s\n", nome);
