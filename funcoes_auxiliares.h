@@ -22,6 +22,7 @@ typedef struct {
     int total_musicas;
 } Album;
 
+// Protótipos das funções
 void adicionar(Musica lista[], int *total);
 void listar(Musica lista[], int total);
 void eliminar(Musica lista[], int *total);
@@ -34,6 +35,7 @@ void remover_musica_album(Album albuns[], int total_albuns, Musica lista_musicas
 void apagar_album(Album albuns[], int *total_albuns);
 void listar_albuns(Album albuns[], int total_albuns);
 void carregar_musicas(Musica lista[], int *total);
-int validarDados(const char *entrada);
 void mostrar_estatisticas(Musica lista[], int total);
 void salvar_estatisticas(Musica lista[], int total);
+void leitura(const char *nome);
+void escrever(const char *nome, const char *conteudo);
